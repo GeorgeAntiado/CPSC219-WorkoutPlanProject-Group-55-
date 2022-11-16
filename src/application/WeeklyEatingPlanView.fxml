@@ -5,11 +5,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.WorkoutplanController">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkoutplanController">
    <children>
       <Label text="WeeklyEatingPla: (This can be Changed)" />
       <VBox prefHeight="200.0" prefWidth="100.0" />
-      <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Main Menu" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Main Menu" />
+            <Button mnemonicParsing="false" onAction="#switchToWeeklyWorkoutTracker" text="Workout Tracker" />
+         </children>
+      </HBox>
    </children>
 </VBox>
