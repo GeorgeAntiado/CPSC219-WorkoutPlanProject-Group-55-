@@ -9,48 +9,55 @@
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkoutplanController">
    <children>
       <Label text="WeeklyEatingPla: (This can be Changed)" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox fx:id="mondayHBox" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Monday" />
             <Button mnemonicParsing="false" onAction="#switchToWeeklyWorkoutTracker" text="Workout Tracker" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <Label fx:id="monCalCount" text=""></Label>
+      <HBox fx:id="tuesdayHBox" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Tuesday" />
             <Button mnemonicParsing="false" onAction="#switchToWeeklyWorkoutTracker" text="Workout Tracker" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <Label fx:id="tueCalCount" text=""></Label>
+      <HBox fx:id="wednesdayHBox" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Wednesday" />
             <Button mnemonicParsing="false" onAction="#switchToWeeklyWorkoutTracker" text="Workout Tracker" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <Label fx:id="wedCalCount" text=""></Label>
+      <HBox fx:id="thursdayHBox" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Thursday" />
             <Button mnemonicParsing="false" onAction="#switchToWeeklyWorkoutTracker" text="Workout Tracker" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <Label fx:id="thurCalCount" text=""></Label>
+      <HBox fx:id="fridayHBox" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Friday" />
             <Button mnemonicParsing="false" onAction="#switchToWeeklyWorkoutTracker" text="Workout Tracker" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <Label fx:id="friCalCount" text=""></Label>
+      <HBox fx:id="saturdayHBox" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Saturday" />
             <Button mnemonicParsing="false" onAction="#switchToWeeklyWorkoutTracker" text="Workout Tracker" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <Label fx:id="satCalCount" text=""></Label>
+      <HBox fx:id="sundayHBox" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Sunday" />
             <Button mnemonicParsing="false" onAction="#switchToWeeklyWorkoutTracker" text="Workout Tracker" />
          </children>
       </HBox>
+      <Label fx:id="sunCalCount" text=""></Label>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Main Menu" />
