@@ -71,15 +71,19 @@ public class EatingPlanController {
 	Label sunCalCount;
 	
 	int dailyCalorieIntake = 2200;
+	int caloriesfromMeals = 0;
 	
-	@FXML
-	void setDailyCalorie(ActionEvent calorieEvent) {
-		monCalCount.setText(dailyCalorieIntake + "to go!");
-		tuesCalCount.setText(dailyCalorieIntake + "to go!");
-		wedCalCount.setText(dailyCalorieIntake + "to go!");
-		thursCalCount.setText(dailyCalorieIntake + "to go!");
-		friCalCount.setText(dailyCalorieIntake + "to go!");
-		satCalCount.setText(dailyCalorieIntake + "to go!");
-		sunCalCount.setText(dailyCalorieIntake + "to go!");
+	@FXML 
+	void setCalorieIntake(ActionEvent intake) {
+		int remainingCalories = dailyCalorieIntake - caloriesfromMeals;
+		if (remainingCalories>0) {
+			String requiredCalories = "You need to eat " + remainingCalories + " more for today";
+		}
+		else if (remainingCalories<0) {
+			String requiredCalories = "You ate " + remainingCalories + " more than needed :(";
+		}
+		else {
+			String requiredCalories = "You met the calorie intake goal!";
+		}
 	}
 }
