@@ -26,7 +26,7 @@
                   <Font name="Calibri" size="16.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#switchToCalorieCalculatorScene" text="Calorie Counter">
+            <Button mnemonicParsing="false" onAction="#switchToCalorieCalculatorScene" text="Calorie Calculator">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin></Button>

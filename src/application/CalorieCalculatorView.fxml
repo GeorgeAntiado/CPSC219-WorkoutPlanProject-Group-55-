@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.collections.FXCollections?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkoutplanController">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CalorieCalculatorController">
    <children>
       <Label text="Calorie Calculator">
          <font>
@@ -16,13 +17,29 @@
          </font></Label>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label text="What is your Age?" />
-            <TextField fx:id="ageTextfield" />
+            <Label text="What is your Age?">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               </Label>
+            <TextField fx:id="ageTextfield">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               </TextField>
+               <Label text="">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               </Label>
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label text="Gender" />
+            <Label text="Gender">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></Label>
             <ChoiceBox fx:id="genderChoicebox" prefWidth="150.0">
             <items>
             	<FXCollections fx:factory="observableArrayList">
@@ -30,13 +47,18 @@
             		<String fx:value="Female" />
             	</FXCollections>
             </items>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
             </ChoiceBox>
          </children>
       </HBox>
-      <Label text="Choose: Metric/Imperial" />
+      <Label text="Choose: Metric/Imperial">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin></Label>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label text="Label" />
             <ChoiceBox fx:id="measurementSystem" prefWidth="150.0">
             <items>
             	<FXCollections fx:factory="observableArrayList">
@@ -44,15 +66,34 @@
             		<String fx:value="Metric" />
             	</FXCollections>
             </items>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
             </ChoiceBox>
-            <Button mnemonicParsing="false" text="Set" />
+            <Button mnemonicParsing="false" onAction="#setMeasurementEnvironment" text="Set">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></Button>
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Main Menu" />
-            <Button mnemonicParsing="false" onAction="#calculateCalories" text="Calculate" />
+            <Label text="Would you like to Bulk/Cut/Maintain" />
+            <ChoiceBox fx:id="calorieIntakePurpose" prefWidth="150.0" />
          </children>
       </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#calculateCalories" text="Calculate">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></Button>
+         </children>
+      </HBox>
+      <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Main Menu">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </Button>
    </children>
 </VBox>

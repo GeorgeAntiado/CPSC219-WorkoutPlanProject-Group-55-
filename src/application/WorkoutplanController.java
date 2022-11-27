@@ -4,20 +4,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class WorkoutplanController {
 	
-	//Control for the  change in scenes
-	private Stage stage;
-	private Scene scene;
+	//Control for the change in scenes
+	Stage stage;
+	Scene scene;
 	
 
 	//This method is used to change into the "Main Menu" Scene
@@ -60,20 +57,5 @@ public class WorkoutplanController {
 		stage.setScene(scene);
 		stage.show();
 		}
-	
 
-    @FXML
-    private ChoiceBox<String> genderChoicebox;
-
-    @FXML
-    private TextField ageTextfield;
-
-    @FXML
-    private ChoiceBox<String> measurementSystem;
-
-    @FXML
-    void calculateCalories(ActionEvent event) {
-
-    }
-	
 	}
