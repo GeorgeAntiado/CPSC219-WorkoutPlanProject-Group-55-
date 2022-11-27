@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 public class CalorieCalculatorController {
 	Stage applicationStage;
 	Scene applicationScene;
+	
+
 
 	/**
 	 * Calorie Calculator Controller
@@ -34,72 +36,42 @@ public class CalorieCalculatorController {
 
     @FXML
     private ChoiceBox<String> measurementSystem;
+    
+    @FXML
+    private Label measurementEnvironmentLabel;
 
     /*
      * Opens new scene for user to input their height and weight
      */
-    @FXML
-    void setMeasurementEnvironment(ActionEvent enterMeasurementSystemStage){
 
+    
+    @FXML
+	public void setMeasurementEnvironment(ActionEvent event) throws IOException {
     	
-//    	String measurementType = measurementSystem.getValue();
-//    	
-//    	if (measurementType == "Metric") {
-//    		//Add elements for Metric System
-//    		VBox elementContainer = new VBox();
-//    		HBox heightContainer = new HBox();
-//    		HBox weightContainer = new HBox();
-//    		Label systemTypeLabel = new Label("metric");
-//    		Label heightLabel = new Label("Height");
-//    		Label weightLabel = new Label("Weight");
-//    		Label cmLabel = new Label("cm");
-//    		Label kgLabel = new Label("kg");
-//    		TextField heightTextField = new TextField();
-//    		TextField weightTextField = new TextField();
-//    		
-//    		heightContainer.getChildren().addAll(heightLabel, heightTextField, cmLabel);
-//    		weightContainer.getChildren().addAll(weightLabel, weightTextField, kgLabel);
-//    		
-//    		elementContainer.getChildren().addAll(systemTypeLabel, heightContainer, weightContainer);
-    		Label myLabel = new Label("this works"); 
-    		Scene metricSystemScene = new Scene(myLabel);
-    		applicationStage.setScene(metricSystemScene);
-    		
-    		System.out.println("Metric System Set");
-    		
-//    	}
-//    	if (measurementType == "Imperial") {
-//    		//Add elements for Imperial System
-//    		VBox elementContainer = new VBox();
-//    		HBox heightContainer = new HBox();
-//    		HBox weightContainer = new HBox();
-//    		Label systemTypeLabel = new Label(measurementType);
-//    		Label heightLabel = new Label("Height");
-//    		Label weightLabel = new Label("Weight");
-//    		Label feetLabel = new Label("feet");
-//    		Label inchLabel = new Label("inch");
-//    		Label poundsLabel = new Label("lbs");
-//    		TextField heightFeetTextField = new TextField();
-//    		TextField heightInchTextField = new TextField();
-//    		TextField weightTextField = new TextField();
-//    		
-//    		heightContainer.getChildren().addAll(heightLabel, heightFeetTextField, feetLabel, heightInchTextField, inchLabel );
-//    		weightContainer.getChildren().addAll(weightLabel, weightTextField, poundsLabel);
-//    		
-//    		elementContainer.getChildren().addAll(systemTypeLabel, heightContainer, weightContainer);
-//    		
-//    		Scene imperialSystemScene = new Scene(elementContainer);
-//    		applicationStage.setScene(imperialSystemScene);
-//    		
-//    		System.out.println("Imperial System Set");
-//    		
-//    	}
-//
-//		
-//		
-//    	System.out.println("Set button was pressed");
+    	String measurementType = measurementSystem.getValue();
     	
-    }
+    	if (measurementType.equals("Metric")) {
+    		
+    		FXMLLoader loader = new FXMLLoader();
+    		VBox root = loader.load(new FileInputStream("src/application/metricSystemView.fxml"));
+    		applicationStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    		applicationScene = new Scene(root);
+    		applicationStage.setScene(applicationScene);
+    		applicationStage.show();
+    	}
+    	else if (measurementType.equals("Imperial")) {
+    		
+       		FXMLLoader loader = new FXMLLoader();
+    		VBox root = loader.load(new FileInputStream("src/application/imperialSystemView.fxml"));
+    		applicationStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    		applicationScene = new Scene(root);
+    		applicationStage.setScene(applicationScene);
+    		applicationStage.show();
+    	}
+
+
+	}
+    
     
    /*
     * Once the user inputs the data required. It is manipulated

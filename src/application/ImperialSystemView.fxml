@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ImperialSystemController">
+   <children>
+      <Label contentDisplay="CENTER" text="Imperial System" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="Height" />
+            <TextField fx:id="userHeightFT" />
+            <Label text="ft" />
+            <TextField fx:id="userHeightInch" />
+            <Label text="inches" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="Weight" />
+            <TextField fx:id="userWeightLBS" />
+            <Label text="lbs" />
+         </children>
+      </HBox>
+      <Button mnemonicParsing="false" onAction="#switchToCalorieCalculatorScene" text="Done" />
+   </children>
+</VBox>

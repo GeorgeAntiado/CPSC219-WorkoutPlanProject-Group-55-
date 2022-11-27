@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MetricSystemController">
+   <children>
+      <Label text="Metric System" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="Height" />
+            <TextField fx:id="userHeight" />
+            <Label text="cm" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="Weight" />
+            <TextField fx:id="userWeight" />
+            <Label text="kg" />
+         </children>
+      </HBox>
+      <Button mnemonicParsing="false" onAction="#switchToCalorieCalculatorScene" text="Done" />
+   </children>
+</VBox>

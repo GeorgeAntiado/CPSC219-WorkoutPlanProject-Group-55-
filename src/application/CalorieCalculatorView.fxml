@@ -73,9 +73,13 @@
             <Button mnemonicParsing="false" onAction="#setMeasurementEnvironment" text="Set">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin></Button>
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
+      <Label fx:id="measurementEnvironmentLabel" />
+      <Label text="Height Label" />
+      <Label text="Weight Label" />
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Would you like to Bulk/Cut/Maintain" />
