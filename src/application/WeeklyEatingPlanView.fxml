@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -9,22 +11,29 @@
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkoutplanController">
    <children>
-      <Label text="WeeklyEatingPlan: (This can be Changed)" />
-      <HBox prefHeight="300.0" prefWidth="700.0">
+      <Label text="WeeklyEatingPlan: (This can be Changed)">
+         <VBox.margin>
+            <Insets left="10.0" />
+         </VBox.margin></Label>
+      <HBox>
          <children>
          
          
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="150.0">
                <children>
-                  <Label text="Monday" />
-                  <Label text="Meals" />
+                  <Label text="Monday">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin></Label>
+                  <Label text="Add your meals">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin></Label>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="mondaymeals" prefWidth="150.0" >
+                        <ChoiceBox fx:id="mondaymeals" prefWidth="30.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
-            			<Integer fx:value="0" />
             			<Integer fx:value="1" />
             			<Integer fx:value="2" />
             			<Integer fx:value="3" />
@@ -35,14 +44,22 @@
             			<Integer fx:value="8" />
             		</FXCollections>
             		</items>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
-                  <Label text="Workouts" />
+                  <Label text="Add your workouts">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin></Label>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="mondayworkouts" prefWidth="150.0" >
+                        <ChoiceBox fx:id="mondayworkouts" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
             			<Integer fx:value="0" />
@@ -51,25 +68,29 @@
             			<Integer fx:value="3" />
             		</FXCollections>
             		</items>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
                   <Label fx:id="monCalCount" text="" />
                </children>
             </VBox>
             
             
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="150.0">
                <children>
                   <Label text="Tuesday" />
-                  <Label text="Meals" />
+                  <Label text="Add your meals" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="tuesdaymeals" prefWidth="150.0" >
+                        <ChoiceBox fx:id="tuesdaymeals" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
-            			<Integer fx:value="0" />
             			<Integer fx:value="1" />
             			<Integer fx:value="2" />
             			<Integer fx:value="3" />
@@ -81,13 +102,15 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
-                  <Label text="Workouts" />
+                  <Label text="Add your workouts" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="tuesdayworkouts" prefWidth="150.0" >
+                        <ChoiceBox fx:id="tuesdayworkouts" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
             			<Integer fx:value="0" />
@@ -97,24 +120,25 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
                   <Label fx:id="tuesCalCount" text="" />
                </children>
             </VBox>
             
             
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="150.0">
                <children>
                   <Label text="Wednesday" />
-                  <Label text="Meals" />
+                  <Label text="Add your meals" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="wednesdaymeals" prefWidth="150.0" >
+                        <ChoiceBox fx:id="wednesdaymeals" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
-            			<Integer fx:value="0" />
             			<Integer fx:value="1" />
             			<Integer fx:value="2" />
             			<Integer fx:value="3" />
@@ -126,13 +150,16 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </Button>
                      </children></HBox>
-                  <Label text="Workouts" />
+                  <Label text="Add your workouts" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="wednesdayworkouts" prefWidth="150.0" >
+                        <ChoiceBox fx:id="wednesdayworkouts" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
             			<Integer fx:value="0" />
@@ -142,24 +169,25 @@
             		</FXCollections>
             		</items>
             		</ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
                   <Label fx:id="wedCalCount" text="" />
                </children>
             </VBox>
             
             
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="150.0">
                <children>
                   <Label text="Thursday" />
-                  <Label text="Meals" />
+                  <Label text="Add your meals" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="thursdaymeals" prefWidth="150.0" >
+                        <ChoiceBox fx:id="thursdaymeals" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
-            			<Integer fx:value="0" />
             			<Integer fx:value="1" />
             			<Integer fx:value="2" />
             			<Integer fx:value="3" />
@@ -171,13 +199,15 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
-                  <Label text="Workouts" />
+                  <Label text="Add your workouts" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="thursdayworkouts" prefWidth="150.0" >
+                        <ChoiceBox fx:id="thursdayworkouts" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
             			<Integer fx:value="0" />
@@ -187,24 +217,25 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
                   <Label fx:id="thursCalCount" text="" />  
                </children>
             </VBox>
             
             
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="150.0">
                <children>
                   <Label text="Friday" />
-                  <Label text="Meals" />
+                  <Label text="Add your meals" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="fridaymeals" prefWidth="150.0" >
+                        <ChoiceBox fx:id="fridaymeals" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
-            			<Integer fx:value="0" />
             			<Integer fx:value="1" />
             			<Integer fx:value="2" />
             			<Integer fx:value="3" />
@@ -216,13 +247,15 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
-                  <Label text="Workouts" />
+                  <Label text="Add your workouts" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="fridayworkouts" prefWidth="150.0" >
+                        <ChoiceBox fx:id="fridayworkouts" prefWidth="40.0">
                         
                         <items>
             		<FXCollections fx:factory="observableArrayList">
@@ -233,24 +266,25 @@
             		</FXCollections>
             		</items>
             		</ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
                   <Label fx:id="friCalCount" text="" />
                </children>
             </VBox>
             
             
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="150.0">
                <children>
                   <Label text="Saturday" />
-                  <Label text="Meals" />
+                  <Label text="Add your meals" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="saturdaymeals" prefWidth="150.0" >
+                        <ChoiceBox fx:id="saturdaymeals" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
-            			<Integer fx:value="0" />
             			<Integer fx:value="1" />
             			<Integer fx:value="2" />
             			<Integer fx:value="3" />
@@ -262,13 +296,15 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
-                  <Label text="Workouts" />
+                  <Label text="Add your workouts" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="saturdayworkouts" prefWidth="150.0" >
+                        <ChoiceBox fx:id="saturdayworkouts" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
             			<Integer fx:value="0" />
@@ -278,24 +314,25 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
                   <Label fx:id="satCalCount" text="" />
                </children>
             </VBox>
             
             
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="150.0">
                <children>
                   <Label text="Sunday" />
-                  <Label text="Meals" />
+                  <Label text="Add your meals" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="sundaymeals" prefWidth="150.0" >
+                        <ChoiceBox fx:id="sundaymeals" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
-            			<Integer fx:value="0" />
             			<Integer fx:value="1" />
             			<Integer fx:value="2" />
             			<Integer fx:value="3" />
@@ -307,13 +344,15 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
-                  <Label text="Workouts" />
+                  <Label text="Add your workouts" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Label" />
-                        <ChoiceBox fx:id="sundayworkouts" prefWidth="150.0" >
+                        <ChoiceBox fx:id="sundayworkouts" prefWidth="40.0">
                         <items>
             		<FXCollections fx:factory="observableArrayList">
             			<Integer fx:value="0" />
@@ -323,7 +362,10 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Button>
                      </children></HBox>
                   <Label fx:id="sunnCalCount" text="" />
                </children>
@@ -332,7 +374,9 @@
             
          </children>
       </HBox>
-      <Button mnemonicParsing="false" onAction="#switchToWeeklyWorkoutTracker" text="Workout Tracker" />
-      <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Main Menu" />
+      <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Main Menu">
+         <VBox.margin>
+            <Insets left="10.0" />
+         </VBox.margin></Button>
    </children>
 </VBox>

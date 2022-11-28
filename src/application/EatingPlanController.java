@@ -73,6 +73,12 @@ public class EatingPlanController {
 	int dailyCalorieIntake = 2200;
 	int caloriesfromMeals = 0;
 	
+	@FXML
+	void exercise(ActionEvent burn) {
+		int exercise= 0;
+		dailyCalorieIntake = dailyCalorieIntake + exercise;
+	}
+	
 	@FXML 
 	void setCalorieIntake(ActionEvent intake) {
 		int remainingCalories = dailyCalorieIntake - caloriesfromMeals;
