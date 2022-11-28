@@ -15,7 +15,7 @@
          <font>
             <Font name="Bauhaus 93" size="26.0" />
          </font></Label>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox>
          <children>
             <Label text="What is your Age?">
                <HBox.margin>
@@ -34,31 +34,33 @@
                </Label>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox>
          <children>
-            <Label text="Gender">
+            <Label text="Sex">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin></Label>
-            <ChoiceBox fx:id="genderChoicebox" prefWidth="150.0">
-            <items>
-            	<FXCollections fx:factory="observableArrayList">
-            		<String fx:value="Male" />
-            		<String fx:value="Female" />
-            	</FXCollections>
-            </items>
+               </HBox.margin>
+            </Label>
+            <ChoiceBox fx:id="sexChoicebox" prefWidth="150.0">
+                <items>
+            		<FXCollections fx:factory="observableArrayList">
+            			<String fx:value="Male" />
+            			<String fx:value="Female" />
+            		</FXCollections>
+            	</items>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </ChoiceBox>
          </children>
       </HBox>
-      <Label text="Choose: Metric/Imperial">
-         <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </VBox.margin></Label>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox>
          <children>
+            <Label text="Choose: Metric/Imperial">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
             <ChoiceBox fx:id="measurementSystem" prefWidth="150.0">
             <items>
             	<FXCollections fx:factory="observableArrayList">
@@ -78,12 +80,44 @@
          </children>
       </HBox>
       <Label fx:id="measurementEnvironmentLabel" />
-      <Label fx:id="heightLabel" text="Height Label" />
-      <Label fx:id="weightLabel" text="Weight Label" />
+      <Label fx:id="heightLabel" text="Height Entered:">
+         <VBox.margin>
+            <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin></Label>
+      <Label fx:id="weightLabel" text="Weight Entered:">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="2.0" />
+         </VBox.margin></Label>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label text="Would you like to Bulk/Cut/Maintain" />
-            <ChoiceBox fx:id="calorieIntakePurpose" prefWidth="150.0" >
+            <Label text="How often do you workout?">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <ChoiceBox fx:id="pointsChoiceBox" prefWidth="150.0">
+              <items>
+            	<FXCollections fx:factory="observableArrayList">
+            		<String fx:value="Rarely" />
+            		<String fx:value="1-3 Days of the Week" />
+            		<String fx:value="3-5 Days of the Week" />
+            		<String fx:value="6-7 Days of the Week" />
+            		<String fx:value="Everyday" />
+            	</FXCollections>
+            </items>
+               	<HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </ChoiceBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="Would you like to Bulk/Cut/Maintain">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></Label>
+            <ChoiceBox fx:id="calorieIntakePurpose" prefWidth="150.0">
               <items>
             	<FXCollections fx:factory="observableArrayList">
             		<String fx:value="Bulk" />
@@ -97,7 +131,7 @@
              </ChoiceBox>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox>
          <children>
             <Button mnemonicParsing="false" onAction="#calculateCalories" text="Calculate">
                <HBox.margin>

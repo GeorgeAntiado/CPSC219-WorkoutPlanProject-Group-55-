@@ -29,10 +29,13 @@ public class CalorieCalculatorController {
     private ChoiceBox<String> calorieIntakePurpose;
 	
     @FXML
-    private ChoiceBox<String> genderChoicebox;
+    private ChoiceBox<String> sexChoicebox;
 
     @FXML
     private ChoiceBox<String> measurementSystem;
+    
+    @FXML
+    private ChoiceBox<String> pointsChoiceBox;
 
     @FXML
     private TextField ageTextfield;
@@ -79,9 +82,19 @@ public class CalorieCalculatorController {
 	}
     
     
-    public void userHeightWeight(String newHeight, String newWeight) {
+    void userHeightWeight(String newHeight, String newWeight) {
     	double heightEntered = Double.parseDouble(newHeight);
     	double weightEntered = Double.parseDouble(newWeight);
+    	
+//    	//Calculate BMR (Different Calculations for male and female)
+//    	if (sexEntered.equals("Male")) {
+//    		basalMetabolicRate = (88.362 + (13.397 * weightEntered) + (4.799 * heightEntered)) - (5.677 * ageEntered);
+//    	}
+//    	else if (sexEntered.equals("Female")) {
+//    		basalMetabolicRate = (447.593 + (9.247 * weightEntered) + (3.098 * heightEntered)) - (4.33 *ageEntered);
+//    	}
+    	
+    	//Must find out how often the user work outs
     	
     	heightLabel.setText("Height is set to: " + newHeight);
       	weightLabel.setText("Weight is set to: " + newWeight); 
@@ -95,8 +108,20 @@ public class CalorieCalculatorController {
     */
     @FXML
     public void calculateCalories(ActionEvent event){
-    	double basalMetabolicRate = 0.0;
-    	int numOfCalories = 0;
+    	String activeType = pointsChoiceBox.getValue();
+    	double pointsAchieved = 0.0;
+    	
+    	if (activeType.equals("1-3 Days of the Week")) {
+    		pointsAchieved = 1.375;
+    	}else if (activeType.equals("3-5 Days of the Week")) {
+    		pointsAchieved = 1.55;
+    	}else if (activeType.equals("6-7 Days of the Week")) {
+    		pointsAchieved = 1.725;
+    	}else if (activeType.equals("Everyday")) {
+    		pointsAchieved = 1.9;
+    	}else {
+    		pointsAchieved = 1.2;
+    	}
     	
     	
     	
