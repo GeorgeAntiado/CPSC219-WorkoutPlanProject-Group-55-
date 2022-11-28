@@ -22,6 +22,9 @@ public class MetricSystemController {
     @FXML
     private TextField userHeight;
     
+	/*
+	 * This method is used to send the information from this scene to the CalorieCalculatorController
+	 */
 	public void switchToCalorieCalculatorScene(ActionEvent event) throws IOException{
 		
 		String userHeightMetric = userHeight.getText();
@@ -39,5 +42,5 @@ public class MetricSystemController {
 		applicationStage.setScene(applicationScene);
 		applicationStage.show();
 	}
-
 }
+

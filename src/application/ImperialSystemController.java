@@ -1,6 +1,5 @@
 package application;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -10,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ImperialSystemController {
@@ -27,7 +25,9 @@ public class ImperialSystemController {
     @FXML
     private TextField userWeightLBS;
 	
-	
+	/*
+	 * This method is used to send the information from this scene to the CalorieCalculatorController
+	 */
 	public void switchToCalorieCalculatorScene(ActionEvent event) throws IOException{
 		String userHeightImperialInch = userHeightInch.getText();
 		String userHeightImperialFT = userHeightFT.getText();

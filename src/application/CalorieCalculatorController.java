@@ -19,11 +19,8 @@ public class CalorieCalculatorController {
 	public Stage applicationStage;
 	public Scene applicationScene;
 	
-
-
-	/**
-	 * Calorie Calculator Controller
-	 */
+    double heightEntered;
+    double weightEntered;
 	
     @FXML
     private ChoiceBox<String> weightGoalsChoicebox;
@@ -53,7 +50,9 @@ public class CalorieCalculatorController {
     private Label calculatedCalories;
 
     /*
-     * Opens new scene for user to input their height and weight
+     * Opens new scene for the user to input their height and weight.
+     * The user will be given two options to pass data
+     * Either Metric or Imperial.
      */
     @FXML
 	public void setMeasurementEnvironment(ActionEvent event) throws IOException {
@@ -83,24 +82,22 @@ public class CalorieCalculatorController {
     	
     	System.out.println("Set Button was pressed");
     	System.out.println("Environment set to " + measurementType);
-
 	}
-    double heightEntered;
-    double weightEntered;
-    
-    //Method used to receive data from the Metric/Imperial systems scenes
+
+     /**
+      * Method used to receive data from the Metric/Imperial systems controllers to the CalorieCalculatorContrillers.
+      * It updates the instance variables that have been initiated in the class and
+      * will also prompt the user what their height and weight has been set to
+      * @param newHeight
+      * @param newWeight
+      */
     void userHeightWeight(String newHeight, String newWeight) {
-		
     	heightEntered = Double.parseDouble(newHeight);
     	weightEntered = Double.parseDouble(newWeight);
     	
         heightLabel.setText(String.format("Height is set to: %.1f Cm", heightEntered ));
-        weightLabel.setText(String.format("Weight is set to: %.1f Kg", weightEntered )); 
-        
-
+        weightLabel.setText(String.format("Weight is set to: %.1f Kg", weightEntered ));
     }
-    
-    
     
    /*
     * Once the user inputs the data required. It is manipulated
@@ -113,7 +110,7 @@ public class CalorieCalculatorController {
     	double numOfCalories = 0.0;
     	
     	int ageEntered = Integer.parseInt(ageTextfield.getText());
-    	int weightGoalsNum = 500;
+    	int weightGoalsNum = 0;
     	String activeType = pointsChoiceBox.getValue();
     	String sexEntered = sexChoicebox.getValue();
     	String weightGoals = weightGoalsChoicebox.getValue();
@@ -121,13 +118,16 @@ public class CalorieCalculatorController {
     	
     	//Calculate BMR (Different Calculations for male and female)
     	if (sexEntered.equals("Male")) {
-   		basalMetabolicRate = (88.362 + (13.397 * weightEntered) + (4.799 * heightEntered)) - (5.677 * ageEntered);
+    		basalMetabolicRate = (88.362 + (13.397 * weightEntered) + (4.799 * heightEntered)) - (5.677 * ageEntered);
     	}
     	else if (sexEntered.equals("Female")) {
     		basalMetabolicRate = (447.593 + (9.247 * weightEntered) + (3.098 * heightEntered)) - (4.33 * ageEntered);
     	}
     	
-    	//Must find out how often the user work outs
+    	/*
+    	 * Must find out how often the user work outs
+    	 * This will later be multiplied by the BMR that was calculated previously
+    	 */
     	if (activeType.equals("1-3 Days of the Week")) {
     		pointsAchieved = 1.375;
     	}else if (activeType.equals("3-5 Days of the Week")) {
@@ -139,23 +139,28 @@ public class CalorieCalculatorController {
     	}else {
     		pointsAchieved = 1.2;
     	}
-    	
-    	numOfCalories = basalMetabolicRate * pointsAchieved;
-    	
+  
+    	/*
+    	 * Depending on what goals the user has with their diet,
+    	 * they will be given the option to either bulk, cut or maintain which will alter
+    	 * the estimated daily calories needed to consume
+    	 */
     	if (weightGoals.equals("Bulk")) {
-    		numOfCalories = numOfCalories + weightGoalsNum;
+    		weightGoalsNum = 500;
     	}else if (weightGoals.equals("Cut")) {
-    		numOfCalories = numOfCalories - weightGoalsNum;
+    		weightGoalsNum = -500;
     	}else {
-    		numOfCalories = numOfCalories + 0;
+    		weightGoalsNum = 0;
     	}
+    	
+    	numOfCalories = basalMetabolicRate * pointsAchieved + weightGoalsNum;
     	
     	calculatedCalories.setText(String.format("Estimated Daily Calories: %.0f", numOfCalories));
     	System.out.println(numOfCalories);
     	System.out.println("Calculate Button was pressed.");
     }
     
-	//This method is used to change into the "Main Menu" Scene
+	//This method is used to return into the "Main Menu" or "Home Page"Scene
 	public void switchToMainMenu(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(new FileInputStream("src/application/WorkoutPlanView1.fxml"));
