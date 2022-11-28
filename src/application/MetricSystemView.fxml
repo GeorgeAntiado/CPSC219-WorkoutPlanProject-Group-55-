@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -7,21 +8,45 @@
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MetricSystemController">
    <children>
-      <Label text="Metric System" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <Label text="Metric System">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin></Label>
+      <HBox>
          <children>
-            <Label text="Height" />
-            <TextField fx:id="userHeight" />
-            <Label text="cm" />
+            <Label text="Height">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </HBox.margin></Label>
+            <TextField fx:id="userHeight">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" />
+               </HBox.margin></TextField>
+            <Label text="cm">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="5.0" right="10.0" />
+               </HBox.margin></Label>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox>
          <children>
-            <Label text="Weight" />
-            <TextField fx:id="userWeight" />
-            <Label text="kg" />
+            <Label text="Weight">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></Label>
+            <TextField fx:id="userWeight">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </HBox.margin></TextField>
+            <Label text="kg">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+               </HBox.margin></Label>
          </children>
       </HBox>
-      <Button mnemonicParsing="false" onAction="#switchToCalorieCalculatorScene" text="Done" />
+      <Button mnemonicParsing="false" onAction="#switchToCalorieCalculatorScene" text="Done">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin></Button>
    </children>
 </VBox>

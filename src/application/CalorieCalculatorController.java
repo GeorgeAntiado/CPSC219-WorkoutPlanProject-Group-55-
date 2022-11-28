@@ -26,7 +26,7 @@ public class CalorieCalculatorController {
 	 */
 	
     @FXML
-    private ChoiceBox<String> calorieIntakePurpose;
+    private ChoiceBox<String> weightGoalsChoicebox;
 	
     @FXML
     private ChoiceBox<String> sexChoicebox;
@@ -41,13 +41,16 @@ public class CalorieCalculatorController {
     private TextField ageTextfield;
     
     @FXML
-    private Label measurementEnvironmentLabel;
+    private Label conversionLabel;
 
     @FXML
     private Label heightLabel;
     
     @FXML
     private Label weightLabel;
+    
+    @FXML
+    private Label calculatedCalories;
 
     /*
      * Opens new scene for user to input their height and weight
@@ -56,6 +59,7 @@ public class CalorieCalculatorController {
 	public void setMeasurementEnvironment(ActionEvent event) throws IOException {
     	
     	String measurementType = measurementSystem.getValue();
+        
     	
     	if (measurementType.equals("Metric")) {
     		
@@ -74,30 +78,26 @@ public class CalorieCalculatorController {
     		applicationScene = new Scene(root);
     		applicationStage.setScene(applicationScene);
     		applicationStage.show();
+    		
     	}
     	
     	System.out.println("Set Button was pressed");
     	System.out.println("Environment set to " + measurementType);
 
 	}
+    double heightEntered;
+    double weightEntered;
     
-    
+    //Method used to receive data from the Metric/Imperial systems scenes
     void userHeightWeight(String newHeight, String newWeight) {
-    	double heightEntered = Double.parseDouble(newHeight);
-    	double weightEntered = Double.parseDouble(newWeight);
+		
+    	heightEntered = Double.parseDouble(newHeight);
+    	weightEntered = Double.parseDouble(newWeight);
     	
-//    	//Calculate BMR (Different Calculations for male and female)
-//    	if (sexEntered.equals("Male")) {
-//    		basalMetabolicRate = (88.362 + (13.397 * weightEntered) + (4.799 * heightEntered)) - (5.677 * ageEntered);
-//    	}
-//    	else if (sexEntered.equals("Female")) {
-//    		basalMetabolicRate = (447.593 + (9.247 * weightEntered) + (3.098 * heightEntered)) - (4.33 *ageEntered);
-//    	}
-    	
-    	//Must find out how often the user work outs
-    	
-    	heightLabel.setText("Height is set to: " + newHeight);
-      	weightLabel.setText("Weight is set to: " + newWeight); 
+        heightLabel.setText(String.format("Height is set to: %.1f Cm", heightEntered ));
+        weightLabel.setText(String.format("Weight is set to: %.1f Kg", weightEntered )); 
+        
+
     }
     
     
@@ -108,9 +108,26 @@ public class CalorieCalculatorController {
     */
     @FXML
     public void calculateCalories(ActionEvent event){
-    	String activeType = pointsChoiceBox.getValue();
     	double pointsAchieved = 0.0;
+    	double basalMetabolicRate = 0.0;
+    	double numOfCalories = 0.0;
     	
+    	int ageEntered = Integer.parseInt(ageTextfield.getText());
+    	int weightGoalsNum = 500;
+    	String activeType = pointsChoiceBox.getValue();
+    	String sexEntered = sexChoicebox.getValue();
+    	String weightGoals = weightGoalsChoicebox.getValue();
+    	
+    	
+    	//Calculate BMR (Different Calculations for male and female)
+    	if (sexEntered.equals("Male")) {
+   		basalMetabolicRate = (88.362 + (13.397 * weightEntered) + (4.799 * heightEntered)) - (5.677 * ageEntered);
+    	}
+    	else if (sexEntered.equals("Female")) {
+    		basalMetabolicRate = (447.593 + (9.247 * weightEntered) + (3.098 * heightEntered)) - (4.33 * ageEntered);
+    	}
+    	
+    	//Must find out how often the user work outs
     	if (activeType.equals("1-3 Days of the Week")) {
     		pointsAchieved = 1.375;
     	}else if (activeType.equals("3-5 Days of the Week")) {
@@ -123,9 +140,18 @@ public class CalorieCalculatorController {
     		pointsAchieved = 1.2;
     	}
     	
+    	numOfCalories = basalMetabolicRate * pointsAchieved;
     	
+    	if (weightGoals.equals("Bulk")) {
+    		numOfCalories = numOfCalories + weightGoalsNum;
+    	}else if (weightGoals.equals("Cut")) {
+    		numOfCalories = numOfCalories - weightGoalsNum;
+    	}else {
+    		numOfCalories = numOfCalories + 0;
+    	}
     	
-    	
+    	calculatedCalories.setText(String.format("Estimated Daily Calories: %.0f", numOfCalories));
+    	System.out.println(numOfCalories);
     	System.out.println("Calculate Button was pressed.");
     }
     

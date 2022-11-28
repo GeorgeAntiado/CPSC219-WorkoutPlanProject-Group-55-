@@ -79,12 +79,12 @@
             </Button>
          </children>
       </HBox>
-      <Label fx:id="measurementEnvironmentLabel" />
-      <Label fx:id="heightLabel" text="Height Entered:">
+      <Label fx:id="conversionLabel" />
+      <Label fx:id="heightLabel" text="Height Entered: 0.0">
          <VBox.margin>
             <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
          </VBox.margin></Label>
-      <Label fx:id="weightLabel" text="Weight Entered:">
+      <Label fx:id="weightLabel" text="Weight Entered: 0.0">
          <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="2.0" />
          </VBox.margin></Label>
@@ -117,7 +117,7 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin></Label>
-            <ChoiceBox fx:id="calorieIntakePurpose" prefWidth="150.0">
+            <ChoiceBox fx:id="weightGoalsChoicebox" prefWidth="150.0">
               <items>
             	<FXCollections fx:factory="observableArrayList">
             		<String fx:value="Bulk" />
@@ -137,6 +137,11 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin></Button>
+            <Label fx:id="calculatedCalories">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
          </children>
       </HBox>
       <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Main Menu">

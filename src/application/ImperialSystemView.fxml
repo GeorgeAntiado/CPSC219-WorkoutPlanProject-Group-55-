@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -7,23 +8,53 @@
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ImperialSystemController">
    <children>
-      <Label contentDisplay="CENTER" text="Imperial System" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <Label contentDisplay="CENTER" layoutX="200.0" text="Imperial System">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin></Label>
+      <HBox>
          <children>
-            <Label text="Height" />
-            <TextField fx:id="userHeightFT" />
-            <Label text="ft" />
-            <TextField fx:id="userHeightInch" />
-            <Label text="inches" />
+            <Label text="Height">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" />
+               </HBox.margin></Label>
+            <TextField fx:id="userHeightFT">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" />
+               </HBox.margin></TextField>
+            <Label text="ft">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" />
+               </HBox.margin></Label>
+            <TextField fx:id="userHeightInch">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="5.0" />
+               </HBox.margin></TextField>
+            <Label text="inches">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="5.0" right="10.0" />
+               </HBox.margin></Label>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox>
          <children>
-            <Label text="Weight" />
-            <TextField fx:id="userWeightLBS" />
-            <Label text="lbs" />
+            <Label text="Weight">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></Label>
+            <TextField fx:id="userWeightLBS">
+               <HBox.margin>
+                  <Insets bottom="10.0" top="5.0" />
+               </HBox.margin></TextField>
+            <Label text="lbs">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+               </HBox.margin></Label>
          </children>
       </HBox>
-      <Button mnemonicParsing="false" onAction="#switchToCalorieCalculatorScene" text="Done" />
+      <Button mnemonicParsing="false" onAction="#switchToCalorieCalculatorScene" text="Done">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin></Button>
    </children>
 </VBox>
