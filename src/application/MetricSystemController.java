@@ -27,11 +27,11 @@ public class MetricSystemController {
 		String userHeightMetric = userHeight.getText();
 		String userWeightMetric = userWeight.getText();
 		
-		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CalorieCalculatorView.fxml"));
 		applicationRoot = loader.load();
+		
 		CalorieCalculatorController newUserHeight = loader.getController();
-		newUserHeight.calculateCalories(null, userHeightMetric, userWeightMetric);
+		newUserHeight.userHeightWeight(userHeightMetric, userWeightMetric);
 		
 
 		applicationStage = (Stage)((Node)event.getSource()).getScene().getWindow();

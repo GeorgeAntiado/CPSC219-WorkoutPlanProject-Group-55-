@@ -82,6 +82,7 @@ public class CalorieCalculatorController {
     public void userHeightWeight(String newHeight, String newWeight) {
     	double heightEntered = Double.parseDouble(newHeight);
     	double weightEntered = Double.parseDouble(newWeight);
+    	
     	heightLabel.setText("Height is set to: " + newHeight);
       	weightLabel.setText("Weight is set to: " + newWeight); 
     }
