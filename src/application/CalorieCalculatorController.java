@@ -16,8 +16,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CalorieCalculatorController {
-	Stage applicationStage;
-	Scene applicationScene;
+	public Stage applicationStage;
+	public Scene applicationScene;
 	
 
 
@@ -32,19 +32,23 @@ public class CalorieCalculatorController {
     private ChoiceBox<String> genderChoicebox;
 
     @FXML
-    private TextField ageTextfield;
+    private ChoiceBox<String> measurementSystem;
 
     @FXML
-    private ChoiceBox<String> measurementSystem;
+    private TextField ageTextfield;
     
     @FXML
     private Label measurementEnvironmentLabel;
 
+    @FXML
+    private Label heightLabel;
+    
+    @FXML
+    private Label weightLabel;
+
     /*
      * Opens new scene for user to input their height and weight
      */
-
-    
     @FXML
 	public void setMeasurementEnvironment(ActionEvent event) throws IOException {
     	
@@ -68,9 +72,20 @@ public class CalorieCalculatorController {
     		applicationStage.setScene(applicationScene);
     		applicationStage.show();
     	}
-
+    	
+    	System.out.println("Set Button was pressed");
+    	System.out.println("Environment set to " + measurementType);
 
 	}
+    
+    
+    public void userHeightWeight(String newHeight, String newWeight) {
+    	double heightEntered = Double.parseDouble(newHeight);
+    	double weightEntered = Double.parseDouble(newWeight);
+    	heightLabel.setText("Height is set to: " + newHeight);
+      	weightLabel.setText("Weight is set to: " + newWeight); 
+    }
+    
     
     
    /*
@@ -78,7 +93,7 @@ public class CalorieCalculatorController {
     * to show their recommended calorie intakes.
     */
     @FXML
-    void calculateCalories(ActionEvent event) {
+    public void calculateCalories(ActionEvent event){
     	double basalMetabolicRate = 0.0;
     	int numOfCalories = 0;
     	
