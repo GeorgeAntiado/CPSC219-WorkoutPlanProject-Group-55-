@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.collections.FXCollections?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkoutplanController">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EatingPlanController">
    <children>
       <Label text="WeeklyEatingPlan: (This can be Changed)">
          <VBox.margin>
@@ -48,7 +48,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getMonMeals" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -72,7 +72,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getMonWorkouts" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -102,7 +102,7 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getTuesMeals" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -120,7 +120,7 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getTuesWorkouts" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -150,7 +150,7 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getWedMeals" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
@@ -169,7 +169,7 @@
             		</FXCollections>
             		</items>
             		</ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getWedWorkouts" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -199,7 +199,7 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getThursMeals" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -217,7 +217,7 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getThursWorkouts" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -247,7 +247,7 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getFriMeals" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -266,7 +266,7 @@
             		</FXCollections>
             		</items>
             		</ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getFriWorkouts" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -296,7 +296,7 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getSatMeals" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -314,7 +314,7 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getSatWorkouts" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin></Button>
@@ -344,7 +344,7 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getSunMeals" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin></Button>
@@ -362,7 +362,7 @@
             		</FXCollections>
             		</items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" prefWidth="50.0" text="Add">
+                        <Button mnemonicParsing="false" onAction="#getSunWorkouts" prefWidth="50.0" text="Add">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin></Button>
