@@ -1,21 +1,19 @@
 package application;
 
 public class BasalMetabolicRate {
-	Double weight;
-	Double height;
-	int age;
-	String sex;
+	private Double weight;
+	private Double height;
+	private int age;
+	private String sex;
 	
 	BasalMetabolicRate(Double uWeight, Double uHeight, int uAge, String uSex) {
-		sex = uSex;
-		weight = uWeight;
-		height = uHeight;
-		age = uAge;
+		setSex(uSex);
+		setWeight(uWeight);
+		setHeight(uHeight);
+		setAge(uAge);
 	}
 	
-	BasalMetabolicRate(String uWeight, String uHeight, String uAge, String uSex) throws InvalidNumberException{
-		sex = uSex; // no need to validate because it is a choice box
-		
+	BasalMetabolicRate(String uWeight, String uHeight, String uAge) throws InvalidNumberException{
 		
 		boolean validNumbers = true;
 		
@@ -77,15 +75,66 @@ public class BasalMetabolicRate {
 		}
 		
 		if (validNumbers) {
-		weight = Double.parseDouble(uWeight);
-		height = Double.parseDouble(uHeight);
-		age = Integer.parseInt(uAge);
+		setWeight(Double.parseDouble(uWeight));
+		setHeight(Double.parseDouble(uHeight));
+		setAge(Integer.parseInt(uAge));
 		}
 		
-		if(weight < 0 || height < 0 || age < 0) {
+		if(getWeight() < 0 || getHeight() < 0 || getAge() < 0) {
 			throw new InvalidNumberException("You entered a negative number. Please make sure all numbers are greater than 0.");
 		}
 		
 	}
+
+	
+	public Double calculateBMR() {
+		double basalMetabolicRate = 0.0;
+		
+		if(sex == "Male") {
+			basalMetabolicRate = (88.362 + (13.397 * weight) + (4.799 * height)) - (5.677 * age);
+		} else if(sex == "Female") {
+			basalMetabolicRate = (447.593 + (9.247 * weight) + (3.098 * height)) - (4.33 * age);
+		}
+		
+		return basalMetabolicRate;
+	}
+	
+	
+	//GETTERS AND SETTERS
+	
+	Double getWeight() {
+		return weight;
+	}
+
+	void setWeight(Double weight) {
+		this.weight = weight;
+	}
+
+	Double getHeight() {
+		return height;
+	}
+
+	void setHeight(Double height) {
+		this.height = height;
+	}
+
+	int getAge() {
+		return age;
+	}
+
+	void setAge(int age) {
+		this.age = age;
+	}
+
+	String getSex() {
+		return sex;
+	}
+
+	void setSex(String sex) {
+		this.sex = sex;
+	}
+	
+	
+	
 	
 }
