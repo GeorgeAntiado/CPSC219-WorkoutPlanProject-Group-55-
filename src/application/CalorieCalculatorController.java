@@ -19,8 +19,8 @@ public class CalorieCalculatorController {
 	public Stage applicationStage;
 	public Scene applicationScene;
 	
-    double heightEntered;
-    double weightEntered;
+    String heightString;
+    String weightString;
 	
     @FXML
     private ChoiceBox<String> weightGoalsChoicebox;
@@ -95,11 +95,11 @@ public class CalorieCalculatorController {
       * @param newWeight
       */
     void userHeightWeight(String newHeight, String newWeight) {
-    	heightEntered = Double.parseDouble(newHeight);
-    	weightEntered = Double.parseDouble(newWeight);
+    	heightString = newHeight;
+    	weightString = newWeight;
     	
-        heightLabel.setText(String.format("Height is set to: %.1f Cm", heightEntered ));
-        weightLabel.setText(String.format("Weight is set to: %.1f Kg", weightEntered ));
+        heightLabel.setText(String.format("Height is set to: " + heightString + "cm"));
+        weightLabel.setText(String.format("Weight is set to: " + weightString + "kg"));
     }
     
    /*
@@ -124,7 +124,7 @@ public class CalorieCalculatorController {
     	
     	//Calculate BMR
     	try {
-    		BasalMetabolicRate userInfo = new BasalMetabolicRate(weightEntered+"", heightEntered+"", ageTextfield.getText(), sexChoicebox.getValue());
+    		BasalMetabolicRate userInfo = new BasalMetabolicRate(weightString, heightString, ageTextfield.getText(), sexChoicebox.getValue());
     		basalMetabolicRate = userInfo.calculateBMR();
     	} catch (InvalidNumberException e) {
     		errorLabel.setText("Invalid Number: " + e); // NEED TO MAKE ERROR LABEL IN FXML
