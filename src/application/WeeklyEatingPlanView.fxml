@@ -374,9 +374,9 @@
             
          </children>
       </HBox>
-      <Button mnemonicParsing="false" onAction="#switchToMainMenu" text="Main Menu">
+      <Button mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="18.0" prefWidth="96.0" text="Main Menu">
          <VBox.margin>
-            <Insets left="10.0" />
+            <Insets bottom="15.0" left="450.0" />
          </VBox.margin></Button>
    </children>
 </VBox>
