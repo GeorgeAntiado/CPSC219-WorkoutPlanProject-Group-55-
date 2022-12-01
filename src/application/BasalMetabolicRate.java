@@ -13,7 +13,8 @@ public class BasalMetabolicRate {
 		setAge(uAge);
 	}
 	
-	BasalMetabolicRate(String uWeight, String uHeight, String uAge) throws InvalidNumberException{
+	BasalMetabolicRate(String uWeight, String uHeight, String uAge, String uSex) throws InvalidNumberException{
+		setSex(uSex);
 		
 		boolean validNumbers = true;
 		
@@ -75,9 +76,9 @@ public class BasalMetabolicRate {
 		}
 		
 		if (validNumbers) {
-		setWeight(Double.parseDouble(uWeight));
-		setHeight(Double.parseDouble(uHeight));
-		setAge(Integer.parseInt(uAge));
+			setWeight(Double.parseDouble(uWeight));
+			setHeight(Double.parseDouble(uHeight));
+			setAge(Integer.parseInt(uAge));
 		}
 		
 		if(getWeight() < 0 || getHeight() < 0 || getAge() < 0) {
@@ -90,9 +91,9 @@ public class BasalMetabolicRate {
 	public Double calculateBMR() {
 		double basalMetabolicRate = 0.0;
 		
-		if(sex == "Male") {
+		if(getSex().equalsIgnoreCase("Male")) {
 			basalMetabolicRate = (88.362 + (13.397 * weight) + (4.799 * height)) - (5.677 * age);
-		} else if(sex == "Female") {
+		} else if(getSex().equalsIgnoreCase("Female")) {
 			basalMetabolicRate = (447.593 + (9.247 * weight) + (3.098 * height)) - (4.33 * age);
 		}
 		
