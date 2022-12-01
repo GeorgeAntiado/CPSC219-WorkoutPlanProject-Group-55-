@@ -50,7 +50,7 @@ public class CalorieCalculatorController {
     private Label calculatedCalories;
     
     @FXML
-    private Label errorLabel; // NEED TO MAKE LABEL IN FXML FILE !!
+    Label errorLabel; // NEED TO MAKE LABEL IN FXML FILE !!
 
     /*
      * Opens new scene for the user to input their height and weight.
@@ -108,10 +108,11 @@ public class CalorieCalculatorController {
     */
     @FXML
     public void calculateCalories(ActionEvent event){
+    	errorLabel.setText("");
+    	
     	double pointsAchieved = 0.0;
     	double basalMetabolicRate = 0.0;
     	double numOfCalories = 0.0;
-    	
     	
     	String activeType = pointsChoiceBox.getValue();
     	int weightGoalsNum = 0;

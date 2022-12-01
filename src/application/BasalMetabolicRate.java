@@ -22,14 +22,8 @@ public class BasalMetabolicRate {
 		for (char i : uAge.toCharArray()) {
     		// Check if character is a digit. 
     		if (!Character.isDigit(i)) {
-    			// Check if character is a decimal.
-    			if (i == '.') {
-    				validNumbers = false;
-    				throw new InvalidNumberException("Don't use decimals in your age.");
-    			} else {
-    				validNumbers = false;
-    				throw new InvalidNumberException("Don't use " + i + " in your age. Make sure to enter a number.");
-    			}
+    			validNumbers = false;
+    			throw new InvalidNumberException("Don't use " + i + " in your age. Make sure to enter an integer.");
     		}	
 		}
 		
