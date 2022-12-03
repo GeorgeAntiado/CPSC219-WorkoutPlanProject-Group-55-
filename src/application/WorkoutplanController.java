@@ -43,6 +43,9 @@ public class WorkoutplanController {
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(new FileInputStream("src/application/WeeklyEatingPlanView.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		EatingPlanController controller = (EatingPlanController)loader.getController();
+		controller.applicationStage = stage;
+		
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();

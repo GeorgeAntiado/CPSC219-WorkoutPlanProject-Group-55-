@@ -30,25 +30,6 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	public void secondstart(Stage secondaryStage) {
-		try {
-
-			FXMLLoader loader = new FXMLLoader();
-			VBox root = loader.load(new FileInputStream("src/application/WeeklyEatingPlanView.fxml"));
-			EatingPlanController controller = (EatingPlanController)loader.getController();
-			controller.applicationStage = secondaryStage;
-					
-			Scene scene = new Scene(root,650,450);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			
-			secondaryStage.setTitle("My Workout Plan");
-			secondaryStage.setScene(scene);
-			secondaryStage.show();
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public static void main(String[] args) {
 		launch(args);
