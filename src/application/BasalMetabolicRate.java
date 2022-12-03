@@ -1,5 +1,10 @@
 package application;
 
+/**
+ * Class validates user input (double & int) in constructor and calculates BMR in calculateBMR() method.
+ * @author CS219-user Sage Sieppert
+ *
+ */
 public class BasalMetabolicRate {
 	private Double weight;
 	private Double height;
@@ -13,6 +18,17 @@ public class BasalMetabolicRate {
 		setAge(uAge);
 	}
 	
+	/**
+	 * Takes the user input from CalorieCalculatorController in the form of String.
+	 * Validates that uAge is an integer, and uWeight and uHeight are doubles.
+	 * Validates that all numbers are > 0.
+	 * Sets weight, height, age, and sex.
+	 * @param uWeight
+	 * @param uHeight
+	 * @param uAge
+	 * @param uSex
+	 * @throws InvalidNumberException
+	 */
 	BasalMetabolicRate(String uWeight, String uHeight, String uAge, String uSex) throws InvalidNumberException{
 		setSex(uSex);
 		
@@ -81,7 +97,10 @@ public class BasalMetabolicRate {
 		}
 	}
 
-	
+	/**
+	 * Calculates the BasalMetabolicRate based on sex, height, weight, and age.
+	 * @return basalMetabolicRate
+	 */
 	public Double calculateBMR() {
 		double basalMetabolicRate = 0.0;
 		
