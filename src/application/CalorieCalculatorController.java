@@ -50,7 +50,7 @@ public class CalorieCalculatorController {
     private Label calculatedCalories;
     
     @FXML
-    Label errorLabel; // NEED TO MAKE LABEL IN FXML FILE !!
+    Label errorLabel;
 
     /*
      * Opens new scene for the user to input their height and weight.
