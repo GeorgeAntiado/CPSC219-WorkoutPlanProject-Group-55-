@@ -119,7 +119,6 @@ public class CalorieCalculatorController {
     	String weightGoals = weightGoalsChoicebox.getValue();
     	
     	
-    	int ageEntered = Integer.parseInt(ageTextfield.getText());
     	String sexEntered = sexChoicebox.getValue();
     	
     	
@@ -128,7 +127,7 @@ public class CalorieCalculatorController {
     		BasalMetabolicRate userInfo = new BasalMetabolicRate(weightString, heightString, ageTextfield.getText(), sexChoicebox.getValue());
     		basalMetabolicRate = userInfo.calculateBMR();
     	} catch (InvalidNumberException e) {
-    		errorLabel.setText("Invalid Number: " + e); // NEED TO MAKE ERROR LABEL IN FXML
+    		errorLabel.setText(""+e);
     		BasalMetabolicRate userInfo = new BasalMetabolicRate(0.0, 0.0, 0, "Male");
     	}
     

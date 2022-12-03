@@ -18,13 +18,14 @@ public class BasalMetabolicRate {
 		
 		boolean validNumbers = true;
 		
+		
 		// validates that uAge is an integer
 		for (char i : uAge.toCharArray()) {
-    		// Check if character is a digit. 
-    		if (!Character.isDigit(i)) {
-    			validNumbers = false;
-    			throw new InvalidNumberException("Don't use " + i + " in your age. Make sure to enter an integer.");
-    		}	
+	    	// Check if character is a digit. 
+	    	if (!Character.isDigit(i)) {
+	    		validNumbers = false;
+	    		throw new InvalidNumberException("Don't use " + i + " in your age. Make sure to enter an integer.");
+	    	}
 		}
 		
 		
@@ -69,16 +70,15 @@ public class BasalMetabolicRate {
     		}	
 		}
 		
-		if (validNumbers) {
+		if (validNumbers == true) {
 			setWeight(Double.parseDouble(uWeight));
 			setHeight(Double.parseDouble(uHeight));
 			setAge(Integer.parseInt(uAge));
+			
+			if(getWeight() < 0 || getHeight() < 0 || getAge() < 0) {
+				throw new InvalidNumberException("You entered a negative number. Please make sure all numbers are greater than 0.");
+			}
 		}
-		
-		if(getWeight() < 0 || getHeight() < 0 || getAge() < 0) {
-			throw new InvalidNumberException("You entered a negative number. Please make sure all numbers are greater than 0.");
-		}
-		
 	}
 
 	
