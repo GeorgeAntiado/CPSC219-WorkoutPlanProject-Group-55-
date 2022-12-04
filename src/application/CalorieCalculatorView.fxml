@@ -15,6 +15,40 @@
          <font>
             <Font name="Bauhaus 93" size="26.0" />
          </font></Label>
+       <HBox>
+         <children>
+            <Label text="Choose: Metric/Imperial">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <ChoiceBox fx:id="measurementSystem" prefWidth="150.0">
+            <items>
+            	<FXCollections fx:factory="observableArrayList">
+            		<String fx:value="Imperial" />
+            		<String fx:value="Metric" />
+            	</FXCollections>
+            </items>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </ChoiceBox>
+            <Button mnemonicParsing="false" onAction="#setMeasurementEnvironment" text="Set">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <Label fx:id="conversionLabel" />
+      <Label fx:id="heightLabel" text="Height Entered: 0.0">
+         <VBox.margin>
+            <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin></Label>
+      <Label fx:id="weightLabel" text="Weight Entered: 0.0">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="2.0" />
+         </VBox.margin></Label>  
       <HBox>
          <children>
             <Label text="What is your Age?">
@@ -54,40 +88,7 @@
             </ChoiceBox>
          </children>
       </HBox>
-      <HBox>
-         <children>
-            <Label text="Choose: Metric/Imperial">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-            </Label>
-            <ChoiceBox fx:id="measurementSystem" prefWidth="150.0">
-            <items>
-            	<FXCollections fx:factory="observableArrayList">
-            		<String fx:value="Imperial" />
-            		<String fx:value="Metric" />
-            	</FXCollections>
-            </items>
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-            </ChoiceBox>
-            <Button mnemonicParsing="false" onAction="#setMeasurementEnvironment" text="Set">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-      <Label fx:id="conversionLabel" />
-      <Label fx:id="heightLabel" text="Height Entered: 0.0">
-         <VBox.margin>
-            <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
-         </VBox.margin></Label>
-      <Label fx:id="weightLabel" text="Weight Entered: 0.0">
-         <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="2.0" />
-         </VBox.margin></Label>
+      
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="How often do you workout?">
@@ -141,6 +142,11 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
+            </Label>
+            <Label fx:id="errorLabel" text="" textFill="RED"> 
+            	<HBox.margin>
+            		<Insets bottom="10" left="10" right="10" top="10" />
+            	</HBox.margin>
             </Label>
          </children>
       </HBox>

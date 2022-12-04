@@ -19,8 +19,8 @@ public class CalorieCalculatorController {
 	public Stage applicationStage;
 	public Scene applicationScene;
 	
-    double heightEntered;
-    double weightEntered;
+    String heightString;
+    String weightString;
 	
     @FXML
     private ChoiceBox<String> weightGoalsChoicebox;
@@ -48,6 +48,9 @@ public class CalorieCalculatorController {
     
     @FXML
     private Label calculatedCalories;
+    
+    @FXML
+    Label errorLabel;
 
     /*
      * Opens new scene for the user to input their height and weight.
@@ -85,18 +88,18 @@ public class CalorieCalculatorController {
 	}
 
      /**
-      * Method used to receive data from the Metric/Imperial systems controllers to the CalorieCalculatorContrillers.
+      * Method used to receive data from the Metric/Imperial systems controllers to the CalorieCalculatorControllers.
       * It updates the instance variables that have been initiated in the class and
       * will also prompt the user what their height and weight has been set to
       * @param newHeight
       * @param newWeight
       */
     void userHeightWeight(String newHeight, String newWeight) {
-    	heightEntered = Double.parseDouble(newHeight);
-    	weightEntered = Double.parseDouble(newWeight);
+    	heightString = newHeight;
+    	weightString = newWeight;
     	
-        heightLabel.setText(String.format("Height is set to: %.1f Cm", heightEntered ));
-        weightLabel.setText(String.format("Weight is set to: %.1f Kg", weightEntered ));
+        heightLabel.setText(String.format("Height is set to: " + heightString + "cm"));
+        weightLabel.setText(String.format("Weight is set to: " + weightString + "kg"));
     }
     
    /*
@@ -105,25 +108,29 @@ public class CalorieCalculatorController {
     */
     @FXML
     public void calculateCalories(ActionEvent event){
+    	errorLabel.setText("");
+    	
     	double pointsAchieved = 0.0;
     	double basalMetabolicRate = 0.0;
     	double numOfCalories = 0.0;
     	
-    	int ageEntered = Integer.parseInt(ageTextfield.getText());
-    	int weightGoalsNum = 0;
     	String activeType = pointsChoiceBox.getValue();
-    	String sexEntered = sexChoicebox.getValue();
+    	int weightGoalsNum = 0;
     	String weightGoals = weightGoalsChoicebox.getValue();
     	
     	
-    	//Calculate BMR (Different Calculations for male and female)
-    	if (sexEntered.equals("Male")) {
-    		basalMetabolicRate = (88.362 + (13.397 * weightEntered) + (4.799 * heightEntered)) - (5.677 * ageEntered);
-    	}
-    	else if (sexEntered.equals("Female")) {
-    		basalMetabolicRate = (447.593 + (9.247 * weightEntered) + (3.098 * heightEntered)) - (4.33 * ageEntered);
-    	}
+    	String sexEntered = sexChoicebox.getValue();
     	
+    	
+    	//Calculate BMR
+    	try {
+    		BasalMetabolicRate userInfo = new BasalMetabolicRate(weightString, heightString, ageTextfield.getText(), sexChoicebox.getValue());
+    		basalMetabolicRate = userInfo.calculateBMR();
+    	} catch (InvalidNumberException e) {
+    		errorLabel.setText(""+e);
+    		BasalMetabolicRate userInfo = new BasalMetabolicRate(0.0, 0.0, 0, "Male");
+    	}
+    
     	/*
     	 * Must find out how often the user work outs
     	 * This will later be multiplied by the BMR that was calculated previously
