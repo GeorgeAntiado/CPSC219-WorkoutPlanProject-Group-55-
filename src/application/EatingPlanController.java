@@ -25,6 +25,7 @@ public class EatingPlanController {
 	int friCalfromMeals = 0;
 	int satCalfromMeals = 0;
 	int sunCalfromMeals = 0;
+	int caloriesBurnt = 0;
 	//Control for the  change in scenes
 			private Stage stage;
 			private Scene scene;
@@ -96,25 +97,87 @@ public class EatingPlanController {
 		
 	int dailyCalorieIntake = 2200;
 	int caloriesfromMeals = 0;
+	
+	//try to combine the doMonMeals and do Mon workouts to calculate and then use ifs to handle the null inputs
+	public int doMonWorkouts(Scene mainScene, ArrayList<String> allExTypes, ArrayList<String> allExIntensity,
+			ArrayList<TextField> allExLengths) {
+		caloriesBurnt= 0;
+		int b = 0;
+		while (b< allExTypes.size()) {
+			int lengths = Integer.parseInt(allExLengths.get(b).getText());
+			exercise a = new exercise(allExTypes.get(b), allExIntensity.get(b), lengths);
+			caloriesBurnt += a.getcaloriesBurnt();
+			b++;
+		}
+		applicationStage.setScene(mainScene);
+		return caloriesBurnt;
+	}
+	
 	//Makes a new scene for the user to enter the calories burnt from different workouts on Monday
 	@FXML
 	void getMonWorkouts(ActionEvent event) {
 		
-		Label exerciseLabel = new Label("Enter ");		
-				
-		Scene mWorkoutsScene = new Scene(new Label("add widgets later"));
+		Scene mainScene = applicationStage.getScene();
+		
+		int numberOfMeals = mondayworkouts.getValue();
+		int rowCounter = 0;
+		
+		VBox allRows = new VBox();
+		ArrayList<String> allExTypes = new ArrayList<String>();
+		ArrayList<String> allExIntensity = new ArrayList<String>();
+		ArrayList<TextField> allExLengths = new ArrayList<TextField>();
+		
+		while (rowCounter < numberOfMeals) {
+			rowCounter++;
+			VBox workoutRow = new VBox();
+			
+			Label workoutLabel = new Label(" Workout " + rowCounter);
+			
+			HBox exTypeColumn = new HBox();
+			Label exTypeLabel = new Label(" Type of Workout ");
+			ChoiceBox<String> exTypeChoiceBox = new ChoiceBox<String>();
+			exTypeChoiceBox.getItems().add("Cardio");
+			exTypeChoiceBox.getItems().add("WeightLifting");
+			exTypeChoiceBox.getItems().add("Sports");
+			allExTypes.add(exTypeChoiceBox.getValue());
+			exTypeColumn.getChildren().addAll(exTypeLabel, exTypeChoiceBox);
+			
+			HBox exIntensityColumn = new HBox();
+			Label exIntensityLabel = new Label(" Workout Intensity ");
+			ChoiceBox<String> exIntensityChoiceBox = new ChoiceBox<String>();
+			exIntensityChoiceBox.getItems().add("Light");
+			exIntensityChoiceBox.getItems().add("Moderate");
+			exIntensityChoiceBox.getItems().add("Hard");
+			allExIntensity.add(exTypeChoiceBox.getValue());
+			exIntensityColumn.getChildren().addAll(exIntensityLabel, exIntensityChoiceBox);
+			
+			HBox exLength = new HBox();
+			Label exLengthLabel = new Label(" Enter the workout length (in minutes) ");
+			TextField exLengthTextField = new TextField();
+			allExLengths.add(exLengthTextField);
+			exLength.getChildren().addAll(exLengthLabel, exLengthTextField);
+			
+			workoutRow.getChildren().addAll(workoutLabel, exTypeColumn, exIntensityColumn, exLength);
+			allRows.getChildren().add(workoutRow);
+		}
+		
+		Button doneButton = new Button("Done");
+		doneButton.setOnAction(doneEvent -> doMonWorkouts(mainScene, allExTypes, allExIntensity,  allExLengths));
+		allRows.getChildren().add(doneButton);
+		Scene mWorkoutsScene = new Scene(allRows);
 		applicationStage.setScene(mWorkoutsScene);
 	}
-	
+
+
 	////gets the sum of calories from all the meals eaten on monday
-	void doMonMeals(Scene mainScene, ArrayList<TextField> allMeals) {
+	public int doMonMeals(Scene mainScene, ArrayList<TextField> allMeals) {
 		monCalfromMeals = 0;
 		
 		for(TextField i : allMeals) {
 			monCalfromMeals += Integer.parseInt(i.getText());
 		}
-		
 		applicationStage.setScene(mainScene);
+		return monCalfromMeals;
 	}
 	
 	//Makes a new scene for the user to enter the calories eaten from their meals on monday
@@ -422,28 +485,12 @@ void getSunMeals(ActionEvent event) {
 	applicationStage.setScene(mMealsScene);
 }
 
-//adds the calories burnt from the workouts/exercises to the daily calorie intake.
-//Which shows how the calories effect the calories needed throughout every day
 @FXML
-	void addexercise(ActionEvent burn) {
-		int exercise= 0;
-		dailyCalorieIntake = dailyCalorieIntake + exercise;
-	}
-	//Sets the Labels for each day to how many calories the user needs to eat after inputting the amount 
-	// of calories burnt from exercising and calories eaten from the different meals throughout the day
-	@FXML 
-	void setCalorieIntake(ActionEvent intake) {
-		int remainingCalories = dailyCalorieIntake - caloriesfromMeals;
-		if (remainingCalories>0) {
-			String requiredCalories =  remainingCalories + " to go!";
-		}
-		else if (remainingCalories<0) {
-			String requiredCalories = remainingCalories + " more than needed :(";
-		}
-		else {
-			String requiredCalories = "You met the calorie goal!";
-		}
-	}
+void setCalCountLabels() {
+	netCalories mon = new netCalories(dailyCalorieIntake, caloriesBurnt, monCalfromMeals);
+	monCalCount.setText(mon.setCalorieLabel());
+}
+	
 	//This method is used to change into the "Main Menu" Scene
 		public void switchToMainMenu(ActionEvent event) throws IOException {
 			FXMLLoader loader = new FXMLLoader();

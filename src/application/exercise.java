@@ -36,7 +36,7 @@ public class exercise {
 				caloriesBurnt = exerciseLength * 10;
 			}
 		}
-		else if (exerciseType =="sports") {
+		else if (exerciseType =="Sports") {
 			if (intensity == "light") {
 				caloriesBurnt = exerciseLength * 5;
 			}

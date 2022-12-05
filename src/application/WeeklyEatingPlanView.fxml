@@ -78,6 +78,8 @@
                            </HBox.margin></Button>
                      </children></HBox>
                   <Label fx:id="monCalCount" text="" />
+                  <Button mnemonicParsing="false" onAction="#setCalCountLabels" text="Check how many cals left">
+                  </Button>
                </children>
             </VBox>
             
