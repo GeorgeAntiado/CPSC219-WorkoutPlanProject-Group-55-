@@ -17,94 +17,46 @@ public class EatingPlanController {
 	//Stage to make new scenes to enter the workouts and meals
 	Stage applicationStage;
 	
-	//variables to track calories eaten for each meal
-	int monCalfromMeals = 0;
-	int tuesCalfromMeals = 0;
-	int wedCalfromMeals = 0;
-	int thursCalfromMeals = 0;
-	int friCalfromMeals = 0;
-	int satCalfromMeals = 0;
-	int sunCalfromMeals = 0;
+	//variables to track calories eaten from all meals
+	int calfromMeals = 0;
+	
+	//variable to track calories eaten from all workouts
 	int caloriesBurnt = 0;
+	
 	//Control for the  change in scenes
 			private Stage stage;
 			private Scene scene;
 	
 	@FXML
-	ChoiceBox<Integer> mondaymeals;
+	ChoiceBox<Integer> meals;
 	
 	@FXML
-	ChoiceBox<Integer> tuesdaymeals;
+	ChoiceBox<Integer> workouts;
 	
 	@FXML
-	ChoiceBox<Integer> wednesdaymeals;
+	Label calCount;
 	
-	@FXML
-	ChoiceBox<Integer> thursdaymeals;
+	//variable to store the maitenance calories 
+	int originalCalorieMaitenance = 2200;
 	
-	@FXML
-	ChoiceBox<Integer> fridaymeals;
-	
-	@FXML
-	ChoiceBox<Integer> saturdaymeals;
-	
-	@FXML
-	ChoiceBox<Integer> sundaymeals;
-	
-	@FXML
-	ChoiceBox<Integer> mondayworkouts;
-	
-	@FXML
-	ChoiceBox<Integer> tuesdayworkouts;
-	
-	@FXML
-	ChoiceBox<Integer> wednesdayworkouts;
-	
-	@FXML
-	ChoiceBox<Integer> thursdayworkouts;
-	
-	@FXML
-	ChoiceBox<Integer> fridayworkouts;
-	
-	@FXML
-	ChoiceBox<Integer> saturdayworkouts;
-	
-	@FXML
-	ChoiceBox<Integer> sundayworkouts;
-	
-	@FXML
-	Label monCalCount;
-	
-	@FXML
-	Label tuesCalCount;
-	
-	@FXML
-	Label wedCalCount;
-	
-	@FXML
-	Label thursCalCount;
-	
-	@FXML
-	Label friCalCount;
-	
-	@FXML
-	Label satCalCount;
-	
-	@FXML
-	Label sunCalCount;
+	//variable that changes that tells the amount of calories that the user needs to eat with the calfromMeals 
+	//and caloriesBurnt variables into account
+	int manipulatedCalorieMaintenance = originalCalorieMaitenance;
 	
 	
-		
-	int dailyCalorieIntake = 2200;
-	int caloriesfromMeals = 0;
-	
-	//try to combine the doMonMeals and do Mon workouts to calculate and then use ifs to handle the null inputs
-	public int doMonWorkouts(Scene mainScene, ArrayList<String> allExTypes, ArrayList<String> allExIntensity,
+	//collects the input from the workouts scene and calculates the calories burnt 
+	public int doWorkouts(Scene mainScene, ArrayList<String> allExTypes, ArrayList<String> allExIntensity,
 			ArrayList<TextField> allExLengths) {
 		caloriesBurnt= 0;
 		int b = 0;
 		while (b< allExTypes.size()) {
-			int lengths = Integer.parseInt(allExLengths.get(b).getText());
+			int lengths = 0;
+			if (allExLengths != null) {
+			lengths = Integer.parseInt(allExLengths.get(b).getText());
+			}
+			else {
+				lengths = 0;
+			}
 			exercise a = new exercise(allExTypes.get(b), allExIntensity.get(b), lengths);
 			caloriesBurnt += a.getcaloriesBurnt();
 			b++;
@@ -113,21 +65,36 @@ public class EatingPlanController {
 		return caloriesBurnt;
 	}
 	
-	//Makes a new scene for the user to enter the calories burnt from different workouts on Monday
+	//Makes a new scene for the user to enter the calories burnt from different workouts
 	@FXML
-	void getMonWorkouts(ActionEvent event) {
+	void getWorkouts(ActionEvent event) {
 		
 		Scene mainScene = applicationStage.getScene();
 		
-		int numberOfMeals = mondayworkouts.getValue();
+		int numberOfWorkouts = workouts.getValue();
 		int rowCounter = 0;
-		
-		VBox allRows = new VBox();
 		ArrayList<String> allExTypes = new ArrayList<String>();
 		ArrayList<String> allExIntensity = new ArrayList<String>();
 		ArrayList<TextField> allExLengths = new ArrayList<TextField>();
 		
-		while (rowCounter < numberOfMeals) {
+		VBox allRows = new VBox();
+		
+		if (numberOfWorkouts == 0) {
+			allExTypes.add("Cardio");
+			allExIntensity.add("Light");
+			TextField g = new TextField("0");
+			allExLengths.add(g);
+		}
+		else if (numberOfWorkouts !=0) {
+		
+		
+		Label intensityAdvice = new Label("Tips about intensity: "
+				+ " Light is as difficult as walking."
+				+ " Moderate is as arduous as jogging."
+				+ " Intense is as hard as sprinting.");
+		allRows.getChildren().add(intensityAdvice);
+		
+		while (rowCounter < numberOfWorkouts) {
 			rowCounter++;
 			VBox workoutRow = new VBox();
 			
@@ -147,7 +114,7 @@ public class EatingPlanController {
 			ChoiceBox<String> exIntensityChoiceBox = new ChoiceBox<String>();
 			exIntensityChoiceBox.getItems().add("Light");
 			exIntensityChoiceBox.getItems().add("Moderate");
-			exIntensityChoiceBox.getItems().add("Hard");
+			exIntensityChoiceBox.getItems().add("Intense");
 			allExIntensity.add(exTypeChoiceBox.getValue());
 			exIntensityColumn.getChildren().addAll(exIntensityLabel, exIntensityChoiceBox);
 			
@@ -160,9 +127,10 @@ public class EatingPlanController {
 			workoutRow.getChildren().addAll(workoutLabel, exTypeColumn, exIntensityColumn, exLength);
 			allRows.getChildren().add(workoutRow);
 		}
+		}
 		
 		Button doneButton = new Button("Done");
-		doneButton.setOnAction(doneEvent -> doMonWorkouts(mainScene, allExTypes, allExIntensity,  allExLengths));
+		doneButton.setOnAction(doneEvent -> doWorkouts(mainScene, allExTypes, allExIntensity,  allExLengths));
 		allRows.getChildren().add(doneButton);
 		Scene mWorkoutsScene = new Scene(allRows);
 		applicationStage.setScene(mWorkoutsScene);
@@ -170,25 +138,58 @@ public class EatingPlanController {
 
 
 	////gets the sum of calories from all the meals eaten on monday
-	public int doMonMeals(Scene mainScene, ArrayList<TextField> allMeals) {
-		monCalfromMeals = 0;
+	public int doMeals(Scene mainScene, ArrayList<TextField> allMeals) {
+		calfromMeals = 0;
 		
 		for(TextField i : allMeals) {
-			monCalfromMeals += Integer.parseInt(i.getText());
+			if (i!= null) {
+			calfromMeals += Integer.parseInt(i.getText());
+			}
 		}
 		applicationStage.setScene(mainScene);
-		return monCalfromMeals;
+		return calfromMeals;
 	}
 	
-	//Makes a new scene for the user to enter the calories eaten from their meals on monday
+	//Makes a new scene for the user to enter the calories eaten from their meals 
 	@FXML
-	void getMonMeals(ActionEvent event) {
+	void getMeals(ActionEvent event) {
 		Scene mainScene = applicationStage.getScene();
 		
-		int numberOfMeals = mondaymeals.getValue();
+		int numberOfMeals = meals.getValue();
 		int rowCounter = 0;
 		
 		VBox allRows = new VBox();
+		
+		Label userPrompt = new Label("Please enter the amount of calories consumed per meal.");
+		allRows.getChildren().add(userPrompt);
+		
+		Label mealAdvice = new Label("");
+		if (numberOfMeals ==1) {
+			mealAdvice.setText("This meal should be about " + manipulatedCalorieMaintenance + " calories");
+		}else if (numberOfMeals == 2) {
+			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/2 + " calories. "
+					+ "One meal should be consumed in the morning and the other in the evening.");
+		}else if (numberOfMeals == 3) {
+			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/3 + " calories. "
+					+ "Can be eaten like the conventional three square meals breakfast, lunch, and dinner.");
+		}else if (numberOfMeals == 4) {
+			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/4 + " calories. "
+					+ "Each meal can be eaten around every 4.5 hours.");
+		}else if (numberOfMeals == 5) {
+			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/5 + " calories. "
+					+ "Each meal can be eaten around every  3.5 hours.");
+		}else if (numberOfMeals == 6) {
+			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/6 + " calories. "
+					+ "Each meal can be eaten around every  3 hours.");
+		}else if (numberOfMeals == 7) {
+			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/7 + " calories. "
+					+ "Each meal can be eaten around every  2.5 hours.");
+		}else if (numberOfMeals == 8) {
+			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/8 + " calories. "
+					+ "Each meal can be eaten around every  2 hours.");
+		}
+		allRows.getChildren().add(mealAdvice);
+		
 		ArrayList<TextField> allMeals = new ArrayList<TextField>();
 		while (rowCounter < numberOfMeals) {
 			rowCounter++;
@@ -202,293 +203,29 @@ public class EatingPlanController {
 			allRows.getChildren().add(mealRow);
 		}
 		Button doneButton = new Button("Done");
-		doneButton.setOnAction(doneEvent -> doMonMeals(mainScene, allMeals));
+		doneButton.setOnAction(doneEvent -> doMeals(mainScene, allMeals));
 		allRows.getChildren().add(doneButton);
 		
 		Scene mMealsScene = new Scene(allRows);
 		applicationStage.setScene(mMealsScene);
 	}
-	
-	//Makes a new scene for the user to enter the calories burnt from different workouts on Tuesday
-	@FXML
-	void getTuesWorkouts(ActionEvent event) {
-		System.out.println("Add tu workouts button was pressed");
-	}
-	
-	//gets the sum of calories from all the meals eaten on tuesday
-	void doTuesMeals(Scene mainScene, ArrayList<TextField> allMeals) {
-		tuesCalfromMeals = 0;
-		
-		for(TextField i : allMeals) {
-			tuesCalfromMeals += Integer.parseInt(i.getText());
-		}
-		
-		applicationStage.setScene(mainScene);
-	}
-	
-	//Makes a new scene for the user to enter the calories eaten from their meals on tuesday
-	@FXML
-	void getTuesMeals(ActionEvent event) {
-		Scene mainScene = applicationStage.getScene();
-		
-		int numberOfMeals = tuesdaymeals.getValue();
-		int rowCounter = 0;
-		
-		VBox allRows = new VBox();
-		ArrayList<TextField> allMeals = new ArrayList<TextField>();
-		while (rowCounter < numberOfMeals) {
-			rowCounter++;
-			HBox mealRow = new HBox();
-			
-			Label mealLabel = new Label("Meal " + rowCounter);
-			TextField mealTextField = new TextField();
-			allMeals.add(mealTextField);
-			
-			mealRow.getChildren().addAll(mealLabel, mealTextField);
-			allRows.getChildren().add(mealRow);
-		}
-		Button doneButton = new Button("Done");
-		doneButton.setOnAction(doneEvent -> doTuesMeals(mainScene, allMeals));
-		allRows.getChildren().add(doneButton);
-		
-		Scene mMealsScene = new Scene(allRows);
-		applicationStage.setScene(mMealsScene);
-	}
-	
-	//Makes a new scene for the user to enter the calories burnt from different workouts on Wednesday
-	@FXML
-	void getWedWorkouts(ActionEvent event) {
-		System.out.println("Add w workouts button was pressed");
-	}
-	
-	//gets the sum of calories from all the meals eaten on wednesday
-	void doWedMeals(Scene mainScene, ArrayList<TextField> allMeals) {
-		wedCalfromMeals = 0;
-		
-		for(TextField i : allMeals) {
-			wedCalfromMeals += Integer.parseInt(i.getText());
-		}
-		
-		applicationStage.setScene(mainScene);
-	}
-	
-	//Makes a new scene for the user to enter the calories eaten from their meals on wednesday
-	@FXML
-	void getWedMeals(ActionEvent event) {
-		Scene mainScene = applicationStage.getScene();
-		
-		int numberOfMeals = wednesdaymeals.getValue();
-		int rowCounter = 0;
-		
-		VBox allRows = new VBox();
-		ArrayList<TextField> allMeals = new ArrayList<TextField>();
-		while (rowCounter < numberOfMeals) {
-			rowCounter++;
-			HBox mealRow = new HBox();
-			
-			Label mealLabel = new Label("Meal " + rowCounter);
-			TextField mealTextField = new TextField();
-			allMeals.add(mealTextField);
-			
-			mealRow.getChildren().addAll(mealLabel, mealTextField);
-			allRows.getChildren().add(mealRow);
-		}
-		Button doneButton = new Button("Done");
-		doneButton.setOnAction(doneEvent -> doWedMeals(mainScene, allMeals));
-		allRows.getChildren().add(doneButton);
-		
-		Scene mMealsScene = new Scene(allRows);
-		applicationStage.setScene(mMealsScene);
-	}
-	
-	//Makes a new scene for the user to enter the calories burnt from different workouts on Thursday
-	@FXML
-	void getThursWorkouts(ActionEvent event) {
-		System.out.println("Add th workouts button was pressed");
-	}
-	
-	//gets the sum of calories from all the meals eaten on thursday
-	void doThursMeals(Scene mainScene, ArrayList<TextField> allMeals) {
-		thursCalfromMeals = 0;
-		
-		for(TextField i : allMeals) {
-			thursCalfromMeals += Integer.parseInt(i.getText());
-		}
-		
-		applicationStage.setScene(mainScene);
-	}
-	
-	//Makes a new scene for the user to enter the calories eaten from their meals on thursday
-	@FXML
-	void getThursMeals(ActionEvent event) {
-		Scene mainScene = applicationStage.getScene();
-		
-		int numberOfMeals = thursdaymeals.getValue();
-		int rowCounter = 0;
-		
-		VBox allRows = new VBox();
-		ArrayList<TextField> allMeals = new ArrayList<TextField>();
-		while (rowCounter < numberOfMeals) {
-			rowCounter++;
-			HBox mealRow = new HBox();
-			
-			Label mealLabel = new Label("Meal " + rowCounter);
-			TextField mealTextField = new TextField();
-			allMeals.add(mealTextField);
-			
-			mealRow.getChildren().addAll(mealLabel, mealTextField);
-			allRows.getChildren().add(mealRow);
-		}
-		Button doneButton = new Button("Done");
-		doneButton.setOnAction(doneEvent -> doThursMeals(mainScene, allMeals));
-		allRows.getChildren().add(doneButton);
-		
-		Scene mMealsScene = new Scene(allRows);
-		applicationStage.setScene(mMealsScene);
-	}
-	
-	//Makes a new scene for the user to enter the calories burnt from different workouts on Friday
-	@FXML
-	void getFriWorkouts(ActionEvent event) {
-		System.out.println("Add f workouts button was pressed");
-	}
-	
-	//gets the sum of calories from all the meals eaten on friday
-	void doFriMeals(Scene mainScene, ArrayList<TextField> allMeals) {
-		friCalfromMeals = 0;
-		
-		for(TextField i : allMeals) {
-			friCalfromMeals += Integer.parseInt(i.getText());
-		}
-		
-		applicationStage.setScene(mainScene);
-	}
-	
-	//Makes a new scene for the user to enter the calories eaten from their meals on friday
-	@FXML
-	void getFriMeals(ActionEvent event) {
-		Scene mainScene = applicationStage.getScene();
-		
-		int numberOfMeals = fridaymeals.getValue();
-		int rowCounter = 0;
-		
-		VBox allRows = new VBox();
-		ArrayList<TextField> allMeals = new ArrayList<TextField>();
-		while (rowCounter < numberOfMeals) {
-			rowCounter++;
-			HBox mealRow = new HBox();
-			
-			Label mealLabel = new Label("Meal " + rowCounter);
-			TextField mealTextField = new TextField();
-			allMeals.add(mealTextField);
-			
-			mealRow.getChildren().addAll(mealLabel, mealTextField);
-			allRows.getChildren().add(mealRow);
-		}
-		Button doneButton = new Button("Done");
-		doneButton.setOnAction(doneEvent -> doFriMeals(mainScene, allMeals));
-		allRows.getChildren().add(doneButton);
-		
-		Scene mMealsScene = new Scene(allRows);
-		applicationStage.setScene(mMealsScene);
-	}
-	
-	//Makes a new scene for the user to enter the calories burnt from different workouts on Saturday
-	@FXML
-	void getSatWorkouts(ActionEvent event) {
-		System.out.println("Add sa workouts button was pressed");
-	}
-	
-	//gets the sum of calories from all the meals eaten on saturday
-	void doSatMeals(Scene mainScene, ArrayList<TextField> allMeals) {
-		satCalfromMeals = 0;
-		
-		for(TextField i : allMeals) {
-			satCalfromMeals += Integer.parseInt(i.getText());
-		}
-		
-		applicationStage.setScene(mainScene);
-	}
-	
-	//Makes a new scene for the user to enter the calories eaten from their meals on saturday
-	@FXML
-	void getSatMeals(ActionEvent event) {
-		Scene mainScene = applicationStage.getScene();
-		
-		int numberOfMeals = saturdaymeals.getValue();
-		int rowCounter = 0;
-		
-		VBox allRows = new VBox();
-		ArrayList<TextField> allMeals = new ArrayList<TextField>();
-		while (rowCounter < numberOfMeals) {
-			rowCounter++;
-			HBox mealRow = new HBox();
-			
-			Label mealLabel = new Label("Meal " + rowCounter);
-			TextField mealTextField = new TextField();
-			allMeals.add(mealTextField);
-			
-			mealRow.getChildren().addAll(mealLabel, mealTextField);
-			allRows.getChildren().add(mealRow);
-		}
-		Button doneButton = new Button("Done");
-		doneButton.setOnAction(doneEvent -> doSatMeals(mainScene, allMeals));
-		allRows.getChildren().add(doneButton);
-		
-		Scene mMealsScene = new Scene(allRows);
-		applicationStage.setScene(mMealsScene);
-	}
-	
-	//Makes a new scene for the user to enter the calories burnt from different workouts on Sunday
+
+//sets the calcount label to tell the user how many calories they need to eat in comparison to their calorie goal
 @FXML
-void getSunWorkouts(ActionEvent event) {
-	System.out.println("Add sunday workouts button was pressed");
+void setCalCountLabel() {
+	netCalories now = new netCalories(manipulatedCalorieMaintenance, caloriesBurnt, calfromMeals);
+	manipulatedCalorieMaintenance = now.calcNetCalories();
+	calCount.setText(now.setCalorieLabel());
+	caloriesBurnt = 0;
+	calfromMeals =0;
 }
 
-//gets the sum of calories from all the meals eaten on sunday
-void doSunMeals(Scene mainScene, ArrayList<TextField> allMeals) {
-	sunCalfromMeals = 0;
-	
-	for(TextField i : allMeals) {
-		sunCalfromMeals += Integer.parseInt(i.getText());
-	}
-	
-	applicationStage.setScene(mainScene);
-}
-
-//Makes a new scene for the user to enter the calories eaten from their meals on sunday
-@FXML
-void getSunMeals(ActionEvent event) {
-	Scene mainScene = applicationStage.getScene();
-	
-	int numberOfMeals = sundaymeals.getValue();
-	int rowCounter = 0;
-	
-	VBox allRows = new VBox();
-	ArrayList<TextField> allMeals = new ArrayList<TextField>();
-	while (rowCounter < numberOfMeals) {
-		rowCounter++;
-		HBox mealRow = new HBox();
-		
-		Label mealLabel = new Label("Meal " + rowCounter);
-		TextField mealTextField = new TextField();
-		allMeals.add(mealTextField);
-		
-		mealRow.getChildren().addAll(mealLabel, mealTextField);
-		allRows.getChildren().add(mealRow);
-	}
-	Button doneButton = new Button("Done");
-	doneButton.setOnAction(doneEvent -> doSunMeals(mainScene, allMeals));
-	allRows.getChildren().add(doneButton);
-	
-	Scene mMealsScene = new Scene(allRows);
-	applicationStage.setScene(mMealsScene);
-}
-
-@FXML
-void setCalCountLabels() {
-	netCalories mon = new netCalories(dailyCalorieIntake, caloriesBurnt, monCalfromMeals);
-	monCalCount.setText(mon.setCalorieLabel());
+//resets values to calculate the calories for a new day
+public void newDay(ActionEvent event) {
+	manipulatedCalorieMaintenance = originalCalorieMaitenance;
+	caloriesBurnt = 0;
+	calfromMeals = 0;
+	calCount.setText("");
 }
 	
 	//This method is used to change into the "Main Menu" Scene
