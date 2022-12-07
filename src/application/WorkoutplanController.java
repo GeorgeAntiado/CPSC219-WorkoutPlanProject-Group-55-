@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -42,20 +43,13 @@ public class WorkoutplanController {
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(new FileInputStream("src/application/WeeklyEatingPlanView.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		EatingPlanController controller = (EatingPlanController)loader.getController();
+		controller.applicationStage = stage;
 		
-	}
-	
-	//This method is used to change into the "Work out Tracker" Scene
-	public void switchToWeeklyWorkoutTracker(ActionEvent event) throws IOException{
-		FXMLLoader loader = new FXMLLoader();
-		VBox root = loader.load(new FileInputStream("src/application/WorkoutTracker.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		}
-
+    
 	}
+
+}
