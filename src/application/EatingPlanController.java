@@ -36,6 +36,9 @@ public class EatingPlanController {
 	@FXML
 	Label calCount;
 	
+	@FXML
+	Label errorLabel;
+	
 	//variable to store the maitenance calories 
 	int originalCalorieMaitenance = 2200;
 	
@@ -46,24 +49,31 @@ public class EatingPlanController {
 	
 	//collects the input from the workouts scene and calculates the calories burnt 
 	public int doWorkouts(Scene mainScene, ArrayList<String> allExTypes, ArrayList<String> allExIntensity,
-			ArrayList<TextField> allExLengths) {
+			ArrayList<TextField> allExLengths) throws InvalidNumberException {
+		
 		caloriesBurnt= 0;
 		int b = 0;
-		while (b< allExTypes.size()) {
-			int lengths = 0;
-			if (allExLengths != null) {
-			lengths = Integer.parseInt(allExLengths.get(b).getText());
+		
+			while (b< allExTypes.size()) {
+				String lengths = "";
+				if (allExLengths != null) {
+				lengths = allExLengths.get(b).getText();
+				}
+				else {
+					lengths = "";
+				}
+				exercise a = new exercise(allExTypes.get(b), allExIntensity.get(b), lengths);
+				
+				caloriesBurnt += a.getcaloriesBurnt();
+				b++;
 			}
-			else {
-				lengths = 0;
-			}
-			exercise a = new exercise(allExTypes.get(b), allExIntensity.get(b), lengths);
-			caloriesBurnt += a.getcaloriesBurnt();
-			b++;
-		}
+		
+		
+		
 		applicationStage.setScene(mainScene);
 		return caloriesBurnt;
 	}
+	
 	
 	//Makes a new scene for the user to enter the calories burnt from different workouts
 	@FXML
@@ -129,21 +139,44 @@ public class EatingPlanController {
 		}
 		}
 		
+		Label errorLabel = new Label("");
 		Button doneButton = new Button("Done");
-		doneButton.setOnAction(doneEvent -> doWorkouts(mainScene, allExTypes, allExIntensity,  allExLengths));
+		
+		doneButton.setOnAction(doneEvent -> {
+			try {
+				doWorkouts(mainScene, allExTypes, allExIntensity,  allExLengths);
+			} catch (InvalidNumberException e) {
+				// TODO Auto-generated catch block
+				errorLabel.setText(""+e);
+			}
+		});
+		allRows.getChildren().add(errorLabel);
 		allRows.getChildren().add(doneButton);
+		
 		Scene mWorkoutsScene = new Scene(allRows);
 		applicationStage.setScene(mWorkoutsScene);
+		
 	}
 
 
 	////gets the sum of calories from all the meals eaten on monday
-	public int doMeals(Scene mainScene, ArrayList<TextField> allMeals) {
+	public int doMeals(Scene mainScene, ArrayList<TextField> allMeals) throws InvalidNumberException{
 		calfromMeals = 0;
 		
 		for(TextField i : allMeals) {
 			if (i!= null) {
-			calfromMeals += Integer.parseInt(i.getText());
+				String str = i.getText();
+				for (char j : str.toCharArray()) {
+					   // Check if character is a digit. 
+					   if (!Character.isDigit(j)) {
+						   throw new InvalidNumberException("Don't use " + j + " in your age. Make sure to enter an integer.");
+					   }
+				}
+						
+				calfromMeals += Integer.parseInt(i.getText());
+				if(calfromMeals<0) {
+					throw new InvalidNumberException("You entered a negative number. Please make sure all numbers are greater than 0.");
+				}
 			}
 		}
 		applicationStage.setScene(mainScene);
@@ -202,39 +235,48 @@ public class EatingPlanController {
 			mealRow.getChildren().addAll(mealLabel, mealTextField);
 			allRows.getChildren().add(mealRow);
 		}
+		Label errorLabel2 = new Label("");
 		Button doneButton = new Button("Done");
-		doneButton.setOnAction(doneEvent -> doMeals(mainScene, allMeals));
+		doneButton.setOnAction(doneEvent -> {
+			try {
+				doMeals(mainScene, allMeals);
+			} catch (InvalidNumberException e) {
+				// TODO Auto-generated catch block
+				errorLabel2.setText(""+e);
+			}
+		});
+		allRows.getChildren().add(errorLabel2);
 		allRows.getChildren().add(doneButton);
 		
 		Scene mMealsScene = new Scene(allRows);
 		applicationStage.setScene(mMealsScene);
 	}
 
-//sets the calcount label to tell the user how many calories they need to eat in comparison to their calorie goal
-@FXML
-void setCalCountLabel() {
-	netCalories now = new netCalories(manipulatedCalorieMaintenance, caloriesBurnt, calfromMeals);
-	manipulatedCalorieMaintenance = now.calcNetCalories();
-	calCount.setText(now.setCalorieLabel());
-	caloriesBurnt = 0;
-	calfromMeals =0;
-}
-
-//resets values to calculate the calories for a new day
-public void newDay(ActionEvent event) {
-	manipulatedCalorieMaintenance = originalCalorieMaitenance;
-	caloriesBurnt = 0;
-	calfromMeals = 0;
-	calCount.setText("");
-}
+	//sets the calcount label to tell the user how many calories they need to eat in comparison to their calorie goal
+	@FXML
+	void setCalCountLabel() {
+		NetCalories now = new NetCalories(manipulatedCalorieMaintenance, caloriesBurnt, calfromMeals);
+		manipulatedCalorieMaintenance = now.calcNetCalories();
+		calCount.setText(now.setCalorieLabel());
+		caloriesBurnt = 0;
+		calfromMeals =0;
+	}
+	
+	//resets values to calculate the calories for a new day
+	public void newDay(ActionEvent event) {
+		manipulatedCalorieMaintenance = originalCalorieMaitenance;
+		caloriesBurnt = 0;
+		calfromMeals = 0;
+		calCount.setText("");
+	}
 	
 	//This method is used to change into the "Main Menu" Scene
-		public void switchToMainMenu(ActionEvent event) throws IOException {
-			FXMLLoader loader = new FXMLLoader();
-			VBox root = loader.load(new FileInputStream("src/application/WorkoutPlanView1.fxml"));
-			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		}
+	public void switchToMainMenu(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		VBox root = loader.load(new FileInputStream("src/application/WorkoutPlanView1.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
 }
