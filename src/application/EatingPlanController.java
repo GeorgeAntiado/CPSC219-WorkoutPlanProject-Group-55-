@@ -252,31 +252,31 @@ public class EatingPlanController {
 		applicationStage.setScene(mMealsScene);
 	}
 
-//sets the calcount label to tell the user how many calories they need to eat in comparison to their calorie goal
-@FXML
-void setCalCountLabel() {
-	netCalories now = new netCalories(manipulatedCalorieMaintenance, caloriesBurnt, calfromMeals);
-	manipulatedCalorieMaintenance = now.calcNetCalories();
-	calCount.setText(now.setCalorieLabel());
-	caloriesBurnt = 0;
-	calfromMeals =0;
-}
-
-//resets values to calculate the calories for a new day
-public void newDay(ActionEvent event) {
-	manipulatedCalorieMaintenance = originalCalorieMaitenance;
-	caloriesBurnt = 0;
-	calfromMeals = 0;
-	calCount.setText("");
-}
+	//sets the calcount label to tell the user how many calories they need to eat in comparison to their calorie goal
+	@FXML
+	void setCalCountLabel() {
+		NetCalories now = new NetCalories(manipulatedCalorieMaintenance, caloriesBurnt, calfromMeals);
+		manipulatedCalorieMaintenance = now.calcNetCalories();
+		calCount.setText(now.setCalorieLabel());
+		caloriesBurnt = 0;
+		calfromMeals =0;
+	}
+	
+	//resets values to calculate the calories for a new day
+	public void newDay(ActionEvent event) {
+		manipulatedCalorieMaintenance = originalCalorieMaitenance;
+		caloriesBurnt = 0;
+		calfromMeals = 0;
+		calCount.setText("");
+	}
 	
 	//This method is used to change into the "Main Menu" Scene
-		public void switchToMainMenu(ActionEvent event) throws IOException {
-			FXMLLoader loader = new FXMLLoader();
-			VBox root = loader.load(new FileInputStream("src/application/WorkoutPlanView1.fxml"));
-			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		}
+	public void switchToMainMenu(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		VBox root = loader.load(new FileInputStream("src/application/WorkoutPlanView1.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
 }
