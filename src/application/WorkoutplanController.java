@@ -13,9 +13,9 @@ import javafx.stage.Stage;
 
 public class WorkoutplanController {
 	
-	//Control for the  change in scenes
-	private Stage stage;
-	private Scene scene;
+	//Control for the change in scenes
+	Stage stage;
+	Scene scene;
 	
 
 	//This method is used to change into the "Main Menu" Scene
@@ -49,7 +49,7 @@ public class WorkoutplanController {
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		
+    
 	}
 
 }
