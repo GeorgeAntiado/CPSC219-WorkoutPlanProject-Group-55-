@@ -18,8 +18,8 @@ public class Main extends Application {
 
 			FXMLLoader loader = new FXMLLoader();
 			VBox root = loader.load(new FileInputStream("src/application/WorkoutPlanView1.fxml"));
+					
 			Scene scene = new Scene(root,650,450);
-			
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			primaryStage.setTitle("My Workout Plan");
