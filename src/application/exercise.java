@@ -31,41 +31,45 @@ public class exercise {
 	
 	
 	int getcaloriesBurnt() {
-		if (getExerciseType() == "cardio") {
-			if (getIntensity() == "light") {
-				caloriesBurnt = getExerciseLength() * 4;
-			}
-			else if (getIntensity()=="medium") {
-				caloriesBurnt = getExerciseLength() * 12;
-			}
-			else if (getIntensity() == "hard") {
-				caloriesBurnt = getExerciseLength() * 30;
-			}	
-		}
-		else if (getExerciseType() == "WeightLifitng") {
-			if (getIntensity() == "light") {
-				caloriesBurnt = getExerciseLength() * 3;
-			}
-			else if(getIntensity() == "medium") {
-				caloriesBurnt = getExerciseLength() * 5;
-			}
-			else if (getIntensity() =="hard") {
-				caloriesBurnt = getExerciseLength() * 10;
-			}
-		}
-		else if (getExerciseType() =="Sports") {
-			if (getIntensity() == "light") {
-				caloriesBurnt = getExerciseLength() * 5;
-			}
-			else if(getIntensity() == "medium") {
-				caloriesBurnt = getExerciseLength() * 9;
-			}
-			else if (getIntensity() =="hard") {
-				caloriesBurnt = getExerciseLength() * 13;
-			}
-		}
+		int caloriesBurnt = 0;
+        if (exerciseType == "Cardio") {
+            if (intensity == "Light") {
+                caloriesBurnt = exerciseLength * 4;
+            }
+            else if (intensity=="Moderate") {
+                caloriesBurnt = exerciseLength * 12;
+            }
+            else if (intensity == "Intense") {
+                caloriesBurnt = exerciseLength * 30;
+            }
+        }
+        else if (exerciseType == "WeightLifting") {
+            if (intensity == "Light") {
+                caloriesBurnt = exerciseLength * 3;
+            }
+            else if(intensity == "Moderate") {
+                caloriesBurnt = exerciseLength * 5;
+            }
+            else if (intensity =="Intense") {
+                caloriesBurnt = exerciseLength * 10;
+            }
+        }
+        else if (exerciseType =="Sports") {
+            if (intensity == "Light") {
+                caloriesBurnt = exerciseLength * 5;
+            }
+            else if(intensity == "Moderate") {
+                caloriesBurnt = exerciseLength * 9;
+            }
+            else if (intensity =="Intense") {
+                caloriesBurnt = exerciseLength * 13;
+            }
+        }
+		
 		return caloriesBurnt;
 	}
+	
+	
 	String getExerciseType() {
 		return exerciseType;
 	}
