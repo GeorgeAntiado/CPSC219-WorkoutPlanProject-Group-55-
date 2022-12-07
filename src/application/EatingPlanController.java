@@ -39,8 +39,9 @@ public class EatingPlanController {
 	@FXML
 	Label errorLabel;
 	
-	//variable to store the maitenance calories 
+	//variable to store the maintenance calories 
 	int originalCalorieMaitenance = 2200;
+
 	
 	//variable that changes that tells the amount of calories that the user needs to eat with the calfromMeals 
 	//and caloriesBurnt variables into account
@@ -97,36 +98,39 @@ public class EatingPlanController {
 		}
 		else if (numberOfWorkouts !=0) {
 		
-		
-		Label intensityAdvice = new Label("Tips about intensity: "
-				+ " Light is as difficult as walking."
-				+ " Moderate is as arduous as jogging."
-				+ " Intense is as hard as sprinting.");
-		allRows.getChildren().add(intensityAdvice);
-		
-		while (rowCounter < numberOfWorkouts) {
-			rowCounter++;
-			VBox workoutRow = new VBox();
+			Label intensityAdvice = new Label(" Tips about intensity: ");
+			Label intensityAdvice2 = new Label(" Light should be as difficult as walking.");
+			Label intensityAdvice3 = new Label(" Moderate should be as arduous as jogging.");
+			Label intensityAdvice4 = new Label(" Intense should be as hard as sprinting.");
+			allRows.getChildren().addAll(intensityAdvice, intensityAdvice2, intensityAdvice3, intensityAdvice4);
 			
-			Label workoutLabel = new Label(" Workout " + rowCounter);
-			
-			HBox exTypeColumn = new HBox();
-			Label exTypeLabel = new Label(" Type of Workout ");
-			ChoiceBox<String> exTypeChoiceBox = new ChoiceBox<String>();
-			exTypeChoiceBox.getItems().add("Cardio");
-			exTypeChoiceBox.getItems().add("WeightLifting");
-			exTypeChoiceBox.getItems().add("Sports");
-			allExTypes.add(exTypeChoiceBox.getValue());
-			exTypeColumn.getChildren().addAll(exTypeLabel, exTypeChoiceBox);
-			
-			HBox exIntensityColumn = new HBox();
-			Label exIntensityLabel = new Label(" Workout Intensity ");
-			ChoiceBox<String> exIntensityChoiceBox = new ChoiceBox<String>();
-			exIntensityChoiceBox.getItems().add("Light");
-			exIntensityChoiceBox.getItems().add("Moderate");
-			exIntensityChoiceBox.getItems().add("Intense");
-			allExIntensity.add(exTypeChoiceBox.getValue());
-			exIntensityColumn.getChildren().addAll(exIntensityLabel, exIntensityChoiceBox);
+			while (rowCounter < numberOfWorkouts) {
+				rowCounter++;
+				VBox workoutRow = new VBox();
+				
+				Label workoutLabel = new Label(" Workout " + rowCounter);
+				
+				HBox exTypeColumn = new HBox();
+				Label exTypeLabel = new Label(" Type of Workout ");
+				ChoiceBox<String> exTypeChoiceBox = new ChoiceBox<String>();
+				exTypeChoiceBox.getItems().add("Cardio");
+				exTypeChoiceBox.getItems().add("WeightLifting");
+				exTypeChoiceBox.getItems().add("Sports");
+				
+				Button setType = new Button("Set exercise type");
+				setType.setOnAction(d-> allExTypes.add(exTypeChoiceBox.getValue()));
+				exTypeColumn.getChildren().addAll(exTypeLabel, exTypeChoiceBox, setType);
+				
+				HBox exIntensityColumn = new HBox();
+				Label exIntensityLabel = new Label(" Workout Intensity ");
+				ChoiceBox<String> exIntensityChoiceBox = new ChoiceBox<String>();
+				exIntensityChoiceBox.getItems().add("Light");
+				exIntensityChoiceBox.getItems().add("Moderate");
+				exIntensityChoiceBox.getItems().add("Intense");
+				
+				Button setIntensity = new Button("Set exercise intensity");
+				setIntensity.setOnAction(e -> allExIntensity.add(exIntensityChoiceBox.getValue()));
+				exIntensityColumn.getChildren().addAll(exIntensityLabel, exIntensityChoiceBox, setIntensity);
 			
 			HBox exLength = new HBox();
 			Label exLengthLabel = new Label(" Enter the workout length (in minutes) ");

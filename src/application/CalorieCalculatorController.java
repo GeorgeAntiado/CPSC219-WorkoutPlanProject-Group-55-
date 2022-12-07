@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -21,6 +22,7 @@ public class CalorieCalculatorController {
 	
     String heightString;
     String weightString;
+    Double numOfCalories;
 	
     @FXML
     private ChoiceBox<String> weightGoalsChoicebox;
@@ -112,7 +114,7 @@ public class CalorieCalculatorController {
     	
     	double pointsAchieved = 0.0;
     	double basalMetabolicRate = 0.0;
-    	double numOfCalories = 0.0;
+    	numOfCalories = 0.0;
     	
     	String activeType = pointsChoiceBox.getValue();
     	int weightGoalsNum = 0;
@@ -166,6 +168,9 @@ public class CalorieCalculatorController {
     	System.out.println(numOfCalories);
     	System.out.println("Calculate Button was pressed.");
     }
+    
+
+
     
 	//This method is used to return into the "Main Menu" or "Home Page"Scene
 	public void switchToMainMenu(ActionEvent event) throws IOException {
