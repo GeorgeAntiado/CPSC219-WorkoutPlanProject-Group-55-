@@ -5,15 +5,23 @@ package application;
  * @author CS219-user Sage Sieppert
  *
  */
-public class BasalMetabolicRate {
+public class UserInformation {
 	private Double weight;
 	private Double height;
 	private int age;
 	private String sex;
+	private int calculatedCalories;
 	
 	
+	UserInformation(){
+		weight = 0.0;
+		height = 0.0;
+		age = 0;
+		sex = "";
+		calculatedCalories = 0;
+	}
 	
-	public BasalMetabolicRate(Double uWeight, Double uHeight, int uAge, String uSex) {
+	public UserInformation(Double uWeight, Double uHeight, int uAge, String uSex) {
 		setSex(uSex);
 		setWeight(uWeight);
 		setHeight(uHeight);
@@ -31,7 +39,7 @@ public class BasalMetabolicRate {
 	 * @param uSex
 	 * @throws InvalidNumberException
 	 */
-	BasalMetabolicRate(String uWeight, String uHeight, String uAge, String uSex) throws InvalidNumberException{
+	UserInformation(String uWeight, String uHeight, String uAge, String uSex) throws InvalidNumberException{
 		setSex(uSex);
 		
 		boolean validNumbers = true;
@@ -102,11 +110,11 @@ public class BasalMetabolicRate {
 	}
 
 	
-	BasalMetabolicRate(BasalMetabolicRate toCopy){
-		this.age = toCopy.age;
-		this.height = toCopy.height;
-		this.weight = toCopy.weight;
-		this.sex = toCopy.sex;
+	UserInformation(UserInformation toCopy){
+		age = toCopy.age;
+		height = toCopy.height;
+		weight = toCopy.weight;
+		sex = toCopy.sex;
 	}
 	
 	
@@ -124,6 +132,14 @@ public class BasalMetabolicRate {
 		}
 		
 		return basalMetabolicRate;
+	}
+	
+	public int calculateNumCalories(Double points, int weightGoals) {
+		System.out.println("UserInformation: weight=" + getWeight() + "; height="+getHeight()+"; age="+getAge()+"; sex="+getSex());
+		System.out.println("BMR=" + calculateBMR() + "; points=" + points + "; weightGoals=" + weightGoals);
+		Double numOfCaloriesDouble = calculateBMR() * points + weightGoals;
+    	setCalculatedCalories(numOfCaloriesDouble.intValue());
+		return calculatedCalories;
 	}
 	
 	
@@ -159,6 +175,14 @@ public class BasalMetabolicRate {
 
 	void setSex(String sex) {
 		this.sex = sex;
+	}
+
+	int getCalculatedCalories() {
+		return calculatedCalories;
+	}
+
+	void setCalculatedCalories(int calculatedCalories) {
+		this.calculatedCalories = calculatedCalories;
 	}
 	
 	
