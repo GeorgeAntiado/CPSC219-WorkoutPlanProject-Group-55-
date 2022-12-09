@@ -23,7 +23,8 @@ public class CalorieCalculatorController extends UserInformation{
 	
     String heightString;
     String weightString;
-    static int numOfCalories;
+    static int numOfCalories; // is static because it is the same across all instances;
+    UserInformation newUser;
 	
     @FXML
     private ChoiceBox<String> weightGoalsChoicebox;
@@ -54,20 +55,20 @@ public class CalorieCalculatorController extends UserInformation{
     
     @FXML
     Label errorLabel;
-    
-    UserInformation newUser;
 
-    /*
+    
+    /**
      * Opens new scene for the user to input their height and weight.
-     * The user will be given two options to pass data
-     * Either Metric or Imperial.
+     * The user will be given two options to pass data (metric or imperial).
+     * @param event
+     * @throws IOException
      */
     @FXML
 	public void setMeasurementEnvironment(ActionEvent event) throws IOException {
     	
     	String measurementType = measurementSystem.getValue();
         
-    	
+    	// Switching to metric scene
     	if (measurementType.equals("Metric")) {
     		
     		FXMLLoader loader = new FXMLLoader();
@@ -77,6 +78,7 @@ public class CalorieCalculatorController extends UserInformation{
     		applicationStage.setScene(applicationScene);
     		applicationStage.show();
     	}
+    	// Switching to imperial scene
     	else if (measurementType.equals("Imperial")) {
     		
        		FXMLLoader loader = new FXMLLoader();
@@ -92,13 +94,14 @@ public class CalorieCalculatorController extends UserInformation{
     	System.out.println("Environment set to " + measurementType);
 	}
 
-     /**
-      * Method used to receive data from the Metric/Imperial systems controllers to the CalorieCalculatorControllers.
-      * It updates the instance variables that have been initiated in the class and
-      * will also prompt the user what their height and weight has been set to
-      * @param newHeight
-      * @param newWeight
-      */
+    
+    /**
+     * Method used to receive data from the Metric/Imperial systems controllers.
+     * Updates the instance variables that have been initiated in the class and.
+     * Tells the user what their height and weight has been set to.
+     * @param newHeight
+     * @param newWeight
+     */
     void userHeightWeight(String newHeight, String newWeight) {
     	heightString = newHeight;
     	weightString = newWeight;
@@ -107,10 +110,12 @@ public class CalorieCalculatorController extends UserInformation{
         weightLabel.setText(String.format("Weight is set to: " + weightString + "kg"));
     }
     
-   /*
-    * Once the user inputs the data required. It is manipulated
-    * to show their recommended calorie intakes.
-    */
+    
+    /**
+     * Collects data from user input. 
+     * Manipulates data to show recommended daily base calorie intakes.
+     * @param event
+     */
     @FXML
     public void calculateCalories(ActionEvent event){
     	errorLabel.setText("");
@@ -119,13 +124,17 @@ public class CalorieCalculatorController extends UserInformation{
     	double basalMetabolicRate = 0.0;
     	numOfCalories = 0;
     	
+    	// Retrieving user input.
     	String activeType = pointsChoiceBox.getValue();
     	int weightGoalsNum = 0;
     	String weightGoals = weightGoalsChoicebox.getValue();
     	String sexEntered = sexChoicebox.getValue();
     	
     	
-    	//Calculate BMR
+    	/*
+    	 * Creates a UserInformaiton object and validates.
+    	 * Calculates the Basal Metabolic Rate to be used in calorie calculations.
+    	 */
     	try {
     		UserInformation userInfo = new UserInformation(weightString, heightString, ageTextfield.getText(), sexChoicebox.getValue());
     		newUser = new UserInformation(userInfo);
@@ -137,8 +146,8 @@ public class CalorieCalculatorController extends UserInformation{
     	}
     
     	/*
-    	 * Must find out how often the user work outs
-    	 * This will later be multiplied by the BMR that was calculated previously
+    	 * Must find out how often the user work outs.
+    	 * To be used in caloric intake calculation.
     	 */
     	if (activeType.equals("1-3 Days of the Week")) {
     		pointsAchieved = 1.375;
@@ -153,9 +162,9 @@ public class CalorieCalculatorController extends UserInformation{
     	}
   
     	/*
-    	 * Depending on what goals the user has with their diet,
-    	 * they will be given the option to either bulk, cut or maintain which will alter
-    	 * the estimated daily calories needed to consume
+    	 * User has three options for weight goals: Bulk, cut, or maintain.
+    	 * Depending on their choice, the estimated daily calories needed to consume
+    	 * are altered.
     	 */
     	if (weightGoals.equals("Bulk")) {
     		weightGoalsNum = 500;
@@ -167,6 +176,7 @@ public class CalorieCalculatorController extends UserInformation{
     	
     	System.out.println("CalorieCalculator: BMR = " + basalMetabolicRate + "; points = " + pointsAchieved + "; weight goals = " + weightGoalsNum);
     	
+    	// Using UserInformation class to calculate the number of calories.
     	numOfCalories = newUser.calculateNumCalories(pointsAchieved, weightGoalsNum);
     	System.out.println("Calorie Calculator: Number of calories = " + numOfCalories);
     	
@@ -176,7 +186,11 @@ public class CalorieCalculatorController extends UserInformation{
     }
 
     
-	//This method is used to return into the "Main Menu" or "Home Page"Scene
+    /**
+     * This method is used to return into the  "Main menu" Scene
+     * @param event
+     * @throws IOException
+     */
 	public void switchToMainMenu(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(new FileInputStream("src/application/WorkoutPlanView1.fxml"));
