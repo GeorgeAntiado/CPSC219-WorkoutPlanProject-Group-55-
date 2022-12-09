@@ -16,13 +16,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class CalorieCalculatorController {
+public class CalorieCalculatorController extends UserInformation{
+
 	public Stage applicationStage;
 	public Scene applicationScene;
 	
     String heightString;
     String weightString;
-    Double numOfCalories;
+    static int numOfCalories;
 	
     @FXML
     private ChoiceBox<String> weightGoalsChoicebox;
@@ -53,6 +54,8 @@ public class CalorieCalculatorController {
     
     @FXML
     Label errorLabel;
+    
+    UserInformation newUser;
 
     /*
      * Opens new scene for the user to input their height and weight.
@@ -114,23 +117,23 @@ public class CalorieCalculatorController {
     	
     	double pointsAchieved = 0.0;
     	double basalMetabolicRate = 0.0;
-    	numOfCalories = 0.0;
+    	numOfCalories = 0;
     	
     	String activeType = pointsChoiceBox.getValue();
     	int weightGoalsNum = 0;
     	String weightGoals = weightGoalsChoicebox.getValue();
-    	
-    	
     	String sexEntered = sexChoicebox.getValue();
     	
     	
     	//Calculate BMR
     	try {
-    		BasalMetabolicRate userInfo = new BasalMetabolicRate(weightString, heightString, ageTextfield.getText(), sexChoicebox.getValue());
-    		basalMetabolicRate = userInfo.calculateBMR();
+    		UserInformation userInfo = new UserInformation(weightString, heightString, ageTextfield.getText(), sexChoicebox.getValue());
+    		newUser = new UserInformation(userInfo);
+    		basalMetabolicRate = newUser.calculateBMR();
     	} catch (InvalidNumberException e) {
     		errorLabel.setText(""+e);
-    		BasalMetabolicRate userInfo = new BasalMetabolicRate(0.0, 0.0, 0, "Male");
+    		UserInformation userInfo = new UserInformation(0.0, 0.0, 0, "Male");
+    		newUser = new UserInformation(userInfo);
     	}
     
     	/*
@@ -162,14 +165,15 @@ public class CalorieCalculatorController {
     		weightGoalsNum = 0;
     	}
     	
-    	numOfCalories = basalMetabolicRate * pointsAchieved + weightGoalsNum;
+    	System.out.println("CalorieCalculator: BMR = " + basalMetabolicRate + "; points = " + pointsAchieved + "; weight goals = " + weightGoalsNum);
     	
-    	calculatedCalories.setText(String.format("Estimated Daily Calories: %.0f", numOfCalories));
-    	System.out.println(numOfCalories);
+    	numOfCalories = newUser.calculateNumCalories(pointsAchieved, weightGoalsNum);
+    	System.out.println("Calorie Calculator: Number of calories = " + numOfCalories);
+    	
+    	calculatedCalories.setText("Estimated Daily Calories: " + numOfCalories);
+    	
     	System.out.println("Calculate Button was pressed.");
     }
-    
-
 
     
 	//This method is used to return into the "Main Menu" or "Home Page"Scene

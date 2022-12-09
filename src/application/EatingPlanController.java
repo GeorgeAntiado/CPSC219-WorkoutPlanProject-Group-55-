@@ -13,7 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
-public class EatingPlanController {
+public class EatingPlanController extends CalorieCalculatorController{
 	//Stage to make new scenes to enter the workouts and meals
 	Stage applicationStage;
 	
@@ -24,8 +24,8 @@ public class EatingPlanController {
 	int caloriesBurnt = 0;
 	
 	//Control for the  change in scenes
-			private Stage stage;
-			private Scene scene;
+	private Stage stage;
+	private Scene scene;
 	
 	@FXML
 	ChoiceBox<Integer> meals;
@@ -36,17 +36,17 @@ public class EatingPlanController {
 	@FXML
 	Label calCount;
 	
-	@FXML
-	Label errorLabel;
-	
 	//variable to store the maintenance calories 
-	int originalCalorieMaitenance = 2200;
+	int originalCalorieMaintenance = 2200; // was super.getCalculatedCalories()
 
 	
 	//variable that changes that tells the amount of calories that the user needs to eat with the calfromMeals 
 	//and caloriesBurnt variables into account
-	int manipulatedCalorieMaintenance = originalCalorieMaitenance;
-	
+	int manipulatedCalorieMaintenance = originalCalorieMaintenance;
+
+	public void setTheCalories(){
+		originalCalorieMaintenance = super.numOfCalories;
+	}
 	
 	//collects the input from the workouts scene and calculates the calories burnt 
 	public int doWorkouts(Scene mainScene, ArrayList<String> allExTypes, ArrayList<String> allExIntensity,
@@ -55,19 +55,19 @@ public class EatingPlanController {
 		caloriesBurnt= 0;
 		int b = 0;
 		
-			while (b< allExTypes.size()) {
-				String lengths = "";
-				if (allExLengths != null) {
-				lengths = allExLengths.get(b).getText();
-				}
-				else {
-					lengths = "";
-				}
-				exercise a = new exercise(allExTypes.get(b), allExIntensity.get(b), lengths);
-				
-				caloriesBurnt += a.getcaloriesBurnt();
-				b++;
+		while (b< allExTypes.size()) {
+			String lengths = "";
+			if (allExLengths != null) {
+			lengths = allExLengths.get(b).getText();
 			}
+			else {
+				lengths = "";
+			}
+			Exercise a = new Exercise(allExTypes.get(b), allExIntensity.get(b), lengths);
+				
+			caloriesBurnt += a.getcaloriesBurnt();
+			b++;
+		}
 		
 		
 		
@@ -150,7 +150,6 @@ public class EatingPlanController {
 			try {
 				doWorkouts(mainScene, allExTypes, allExIntensity,  allExLengths);
 			} catch (InvalidNumberException e) {
-				// TODO Auto-generated catch block
 				errorLabel.setText(""+e);
 			}
 		});
@@ -163,7 +162,7 @@ public class EatingPlanController {
 	}
 
 
-	////gets the sum of calories from all the meals eaten on monday
+	////gets the sum of calories from all the meals eaten in day
 	public int doMeals(Scene mainScene, ArrayList<TextField> allMeals) throws InvalidNumberException{
 		calfromMeals = 0;
 		
@@ -195,6 +194,9 @@ public class EatingPlanController {
 		int numberOfMeals = meals.getValue();
 		int rowCounter = 0;
 		
+		manipulatedCalorieMaintenance = numOfCalories;
+		System.out.println("calories: "+manipulatedCalorieMaintenance);
+		
 		VBox allRows = new VBox();
 		
 		Label userPrompt = new Label("Please enter the amount of calories consumed per meal.");
@@ -204,25 +206,25 @@ public class EatingPlanController {
 		if (numberOfMeals ==1) {
 			mealAdvice.setText("This meal should be about " + manipulatedCalorieMaintenance + " calories");
 		}else if (numberOfMeals == 2) {
-			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/2 + " calories. "
+			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/2 + " calories. "
 					+ "One meal should be consumed in the morning and the other in the evening.");
 		}else if (numberOfMeals == 3) {
-			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/3 + " calories. "
+			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/3 + " calories. "
 					+ "Can be eaten like the conventional three square meals breakfast, lunch, and dinner.");
 		}else if (numberOfMeals == 4) {
-			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/4 + " calories. "
+			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/4 + " calories. "
 					+ "Each meal can be eaten around every 4.5 hours.");
 		}else if (numberOfMeals == 5) {
-			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/5 + " calories. "
+			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/5 + " calories. "
 					+ "Each meal can be eaten around every  3.5 hours.");
 		}else if (numberOfMeals == 6) {
-			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/6 + " calories. "
+			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/6 + " calories. "
 					+ "Each meal can be eaten around every  3 hours.");
 		}else if (numberOfMeals == 7) {
-			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/7 + " calories. "
+			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/7 + " calories. "
 					+ "Each meal can be eaten around every  2.5 hours.");
 		}else if (numberOfMeals == 8) {
-			mealAdvice.setText("Each meal should be around" + manipulatedCalorieMaintenance/8 + " calories. "
+			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/8 + " calories. "
 					+ "Each meal can be eaten around every  2 hours.");
 		}
 		allRows.getChildren().add(mealAdvice);
@@ -245,7 +247,6 @@ public class EatingPlanController {
 			try {
 				doMeals(mainScene, allMeals);
 			} catch (InvalidNumberException e) {
-				// TODO Auto-generated catch block
 				errorLabel2.setText(""+e);
 			}
 		});
@@ -268,7 +269,7 @@ public class EatingPlanController {
 	
 	//resets values to calculate the calories for a new day
 	public void newDay(ActionEvent event) {
-		manipulatedCalorieMaintenance = originalCalorieMaitenance;
+		manipulatedCalorieMaintenance = originalCalorieMaintenance;
 		caloriesBurnt = 0;
 		calfromMeals = 0;
 		calCount.setText("");

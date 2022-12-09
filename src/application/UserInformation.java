@@ -5,13 +5,23 @@ package application;
  * @author CS219-user Sage Sieppert
  *
  */
-public class BasalMetabolicRate {
+public class UserInformation {
 	private Double weight;
 	private Double height;
 	private int age;
 	private String sex;
+	private int calculatedCalories;
 	
-	BasalMetabolicRate(Double uWeight, Double uHeight, int uAge, String uSex) {
+	
+	UserInformation(){
+		weight = 0.0;
+		height = 0.0;
+		age = 0;
+		sex = "";
+		calculatedCalories = 0;
+	}
+	
+	public UserInformation(Double uWeight, Double uHeight, int uAge, String uSex) {
 		setSex(uSex);
 		setWeight(uWeight);
 		setHeight(uHeight);
@@ -29,13 +39,13 @@ public class BasalMetabolicRate {
 	 * @param uSex
 	 * @throws InvalidNumberException
 	 */
-	BasalMetabolicRate(String uWeight, String uHeight, String uAge, String uSex) throws InvalidNumberException{
+	UserInformation(String uWeight, String uHeight, String uAge, String uSex) throws InvalidNumberException{
 		setSex(uSex);
 		
 		boolean validNumbers = true;
 		
 		
-		// validates that uAge is an integer
+		// Validating age
 		for (char i : uAge.toCharArray()) {
 	    	// Check if character is a digit. 
 	    	if (!Character.isDigit(i)) {
@@ -44,7 +54,7 @@ public class BasalMetabolicRate {
 	    	}
 		}
 		
-		
+		// Validating weight
 		boolean checkForDecimal = false;
 		for (char i : uWeight.toCharArray()) {
     		// Check if character is a digit. 
@@ -65,7 +75,7 @@ public class BasalMetabolicRate {
     		}	
 		}
 		
-		
+		// Validating height
 		checkForDecimal = false;
 		for (char i : uHeight.toCharArray()) {
     		// Check if character is a digit. 
@@ -86,17 +96,28 @@ public class BasalMetabolicRate {
     		}	
 		}
 		
+		// Setting instance variables
 		if (validNumbers == true) {
 			setWeight(Double.parseDouble(uWeight));
 			setHeight(Double.parseDouble(uHeight));
 			setAge(Integer.parseInt(uAge));
 			
+			// Validating positive numbers
 			if(getWeight() < 0 || getHeight() < 0 || getAge() < 0) {
 				throw new InvalidNumberException("You entered a negative number. Please make sure all numbers are greater than 0.");
 			}
 		}
 	}
 
+	
+	UserInformation(UserInformation toCopy){
+		age = toCopy.age;
+		height = toCopy.height;
+		weight = toCopy.weight;
+		sex = toCopy.sex;
+	}
+	
+	
 	/**
 	 * Calculates the BasalMetabolicRate based on sex, height, weight, and age.
 	 * @return basalMetabolicRate
@@ -111,6 +132,14 @@ public class BasalMetabolicRate {
 		}
 		
 		return basalMetabolicRate;
+	}
+	
+	public int calculateNumCalories(Double points, int weightGoals) {
+		System.out.println("UserInformation: weight=" + getWeight() + "; height="+getHeight()+"; age="+getAge()+"; sex="+getSex());
+		System.out.println("BMR=" + calculateBMR() + "; points=" + points + "; weightGoals=" + weightGoals);
+		Double numOfCaloriesDouble = calculateBMR() * points + weightGoals;
+    	setCalculatedCalories(numOfCaloriesDouble.intValue());
+		return calculatedCalories;
 	}
 	
 	
@@ -146,6 +175,14 @@ public class BasalMetabolicRate {
 
 	void setSex(String sex) {
 		this.sex = sex;
+	}
+
+	int getCalculatedCalories() {
+		return calculatedCalories;
+	}
+
+	void setCalculatedCalories(int calculatedCalories) {
+		this.calculatedCalories = calculatedCalories;
 	}
 	
 	

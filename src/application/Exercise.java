@@ -1,6 +1,6 @@
 package application;
 
-public class exercise {
+public class Exercise {
 	
 	//attributes
 	private String exerciseType;
@@ -8,7 +8,7 @@ public class exercise {
 	private String intensity;
 	int caloriesBurnt = 0;
 		
-	public exercise(String typeOfExercise, String intensityOfExercise, String lengthOfExercise) throws InvalidNumberException {
+	public Exercise(String typeOfExercise, String intensityOfExercise, String lengthOfExercise) throws InvalidNumberException {
 		setExerciseType(typeOfExercise);
 		setIntensity(intensityOfExercise);
 		
