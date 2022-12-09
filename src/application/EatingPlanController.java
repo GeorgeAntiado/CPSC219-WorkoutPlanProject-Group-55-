@@ -80,6 +80,8 @@ public class EatingPlanController extends CalorieCalculatorController{
 		
 		int numberOfWorkouts = workouts.getValue();
 		int rowCounter = 0;
+		
+		//Lists to keep track of the exercise type, intensity, and length for each workout
 		ArrayList<String> allExTypes = new ArrayList<String>();
 		ArrayList<String> allExIntensity = new ArrayList<String>();
 		ArrayList<TextField> allExLengths = new ArrayList<TextField>();
@@ -113,6 +115,8 @@ public class EatingPlanController extends CalorieCalculatorController{
 				exTypeChoiceBox.getItems().add("WeightLifting");
 				exTypeChoiceBox.getItems().add("Sports");
 				
+				//This button sets the type of exercise for each individual workout 
+				//in the allExTypes list
 				Button setType = new Button("Set exercise type");
 				setType.setOnAction(d-> allExTypes.add(exTypeChoiceBox.getValue()));
 				exTypeColumn.getChildren().addAll(exTypeLabel, exTypeChoiceBox, setType);
@@ -124,6 +128,8 @@ public class EatingPlanController extends CalorieCalculatorController{
 				exIntensityChoiceBox.getItems().add("Moderate");
 				exIntensityChoiceBox.getItems().add("Intense");
 				
+				//This button sets the intensity for each individual workout
+				//in the allExIntensity list
 				Button setIntensity = new Button("Set exercise intensity");
 				setIntensity.setOnAction(e -> allExIntensity.add(exIntensityChoiceBox.getValue()));
 				exIntensityColumn.getChildren().addAll(exIntensityLabel, exIntensityChoiceBox, setIntensity);
