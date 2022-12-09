@@ -191,7 +191,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 	
 	
 	/**
-	 * Makes a new scene for the user to enter the calories eaten from their meals 
+	 * Makes a new scene for the user to enter the calories eaten from their meals.
 	 * @param event
 	 */
 	@FXML
@@ -293,7 +293,9 @@ public class EatingPlanController extends CalorieCalculatorController{
 	
 	
 	/**
-	 * This method is used to change into the "Main Menu" Scene
+     * This method is used to return into the "Main menu" Scene
+	 * Source: Bro Code Video - JavaFX switch scenes (https://www.youtube.com/watch?v=hcM-R-YOKkQ)
+	 * This source was used for the methods to allow us to switch into different scenes.
 	 * @param event
 	 * @throws IOException
 	 */
