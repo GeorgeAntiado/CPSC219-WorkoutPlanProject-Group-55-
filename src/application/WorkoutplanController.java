@@ -18,7 +18,9 @@ public class WorkoutplanController {
 	private Scene scene;
 	
 	/**
-	 * This method is used to change into the "Calorie Calculator" Scene
+	 * This method is used to change into the "Calorie Calculator" Scene.
+	 * Source: Bro Code Video - JavaFX switch scenes (https://www.youtube.com/watch?v=hcM-R-YOKkQ).
+	 * This source was used for the methods to allow us to switch into different scenes.
 	 * @param event
 	 * @throws IOException
 	 */
@@ -32,7 +34,9 @@ public class WorkoutplanController {
 	}
 	
 	/**
-	 * This method is used to change into the "Eating Plan" Scene
+	 * This method is used to change into the "Eating Plan" Scene.
+	 * Source: Bro Code Video - JavaFX switch scenes (https://www.youtube.com/watch?v=hcM-R-YOKkQ).
+	 * This source was used for the methods to allow us to switch into different scenes.
 	 * @param event
 	 * @throws IOException
 	 */
