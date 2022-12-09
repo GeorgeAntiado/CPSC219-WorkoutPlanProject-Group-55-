@@ -26,10 +26,11 @@ public class CalorieCalculatorController extends UserInformation{
 	public Stage applicationStage;
 	public Scene applicationScene;
 	
-    String heightString;
-    String weightString;
-    static int numOfCalories; // is static because it is the same across all instances;
-    UserInformation newUser;
+    private String heightString;
+    private String weightString;
+    public static int numOfCalories; // is static because it is the same across all instances.
+    	// Received help from Calum Sieppert (Sage's brother) to decide on this ^
+    private UserInformation newUser;
 	
     @FXML
     private ChoiceBox<String> weightGoalsChoicebox;
@@ -59,7 +60,7 @@ public class CalorieCalculatorController extends UserInformation{
     private Label calculatedCalories;
     
     @FXML
-    Label errorLabel;
+    private Label errorLabel;
 
     
     /**
@@ -108,11 +109,11 @@ public class CalorieCalculatorController extends UserInformation{
      * @param newWeight
      */
     void userHeightWeight(String newHeight, String newWeight) {
-    	heightString = newHeight;
-    	weightString = newWeight;
+    	setHeightString(newHeight);
+    	setWeightString(newWeight);
     	
-        heightLabel.setText(String.format("Height is set to: " + heightString + "cm"));
-        weightLabel.setText(String.format("Weight is set to: " + weightString + "kg"));
+        heightLabel.setText(String.format("Height is set to: " + getHeightString() + "cm"));
+        weightLabel.setText(String.format("Weight is set to: " + getWeightString() + "kg"));
     }
     
     
@@ -141,13 +142,13 @@ public class CalorieCalculatorController extends UserInformation{
     	 * Calculates the Basal Metabolic Rate to be used in calorie calculations.
     	 */
     	try {
-    		UserInformation userInfo = new UserInformation(weightString, heightString, ageTextfield.getText(), sexChoicebox.getValue());
-    		newUser = new UserInformation(userInfo);
-    		basalMetabolicRate = newUser.calculateBMR();
+    		UserInformation userInfo = new UserInformation(getWeightString(), getHeightString(), ageTextfield.getText(), sexChoicebox.getValue());
+    		setNewUser(new UserInformation(userInfo));
+    		basalMetabolicRate = getNewUser().calculateBMR();
     	} catch (InvalidNumberException e) {
     		errorLabel.setText(""+e);
     		UserInformation userInfo = new UserInformation(0.0, 0.0, 0, "Male");
-    		newUser = new UserInformation(userInfo);
+    		setNewUser(new UserInformation(userInfo));
     	}
     
     	/*
@@ -182,7 +183,7 @@ public class CalorieCalculatorController extends UserInformation{
     	System.out.println("CalorieCalculator: BMR = " + basalMetabolicRate + "; points = " + pointsAchieved + "; weight goals = " + weightGoalsNum);
     	
     	// Using UserInformation class to calculate the number of calories.
-    	numOfCalories = newUser.calculateNumCalories(pointsAchieved, weightGoalsNum);
+    	numOfCalories = getNewUser().calculateNumCalories(pointsAchieved, weightGoalsNum);
     	System.out.println("Calorie Calculator: Number of calories = " + numOfCalories);
     	
     	calculatedCalories.setText("Estimated Daily Calories: " + numOfCalories);
@@ -203,6 +204,41 @@ public class CalorieCalculatorController extends UserInformation{
 		applicationScene = new Scene(root);
 		applicationStage.setScene(applicationScene);
 		applicationStage.show();
+	}
+
+	
+	/*
+	 * SETTERS AND GETTERS
+	 */
+	
+
+	String getHeightString() {
+		return heightString;
+	}
+
+
+	void setHeightString(String heightString) {
+		this.heightString = heightString;
+	}
+
+
+	String getWeightString() {
+		return weightString;
+	}
+
+
+	void setWeightString(String weightString) {
+		this.weightString = weightString;
+	}
+
+
+	UserInformation getNewUser() {
+		return newUser;
+	}
+
+
+	void setNewUser(UserInformation newUser) {
+		this.newUser = newUser;
 	}
 	
 }
