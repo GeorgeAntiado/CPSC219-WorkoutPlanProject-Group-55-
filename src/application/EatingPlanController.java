@@ -14,18 +14,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 public class EatingPlanController extends CalorieCalculatorController{
-	//Stage to make new scenes to enter the workouts and meals
+	
 	Stage applicationStage;
-	
-	//variables to track calories eaten from all meals
-	int calfromMeals = 0;
-	
-	//variable to track calories eaten from all workouts
-	int caloriesBurnt = 0;
-	
-	//Control for the  change in scenes
 	private Stage stage;
 	private Scene scene;
+	
+	
+	int calfromMeals = 0; // tracks calories eaten from all meals
+	int caloriesBurnt = 0; // tracks calories burned from all workouts
+	
+	int originalCalorieMaintenance = 2200; // stores the maintenance calories, default 2200
+	int manipulatedCalorieMaintenance = originalCalorieMaintenance; // tells the amount of calories that the user needs to eat, is updated in code
 	
 	@FXML
 	ChoiceBox<Integer> meals;
@@ -36,25 +35,20 @@ public class EatingPlanController extends CalorieCalculatorController{
 	@FXML
 	Label calCount;
 	
-	//variable to store the maintenance calories 
-	int originalCalorieMaintenance = 2200; // was super.getCalculatedCalories()
-
-	
-	//variable that changes that tells the amount of calories that the user needs to eat with the calfromMeals 
-	//and caloriesBurnt variables into account
-	int manipulatedCalorieMaintenance = originalCalorieMaintenance;
-
-	public void setTheCalories(){
-		originalCalorieMaintenance = super.numOfCalories;
-	}
-	
-	//collects the input from the workouts scene and calculates the calories burnt 
+	/**
+	 * Collects the input from the workouts scene and calculates the caloriesBurnt
+	 * @param mainScene
+	 * @param allExTypes
+	 * @param allExIntensity
+	 * @param allExLengths
+	 * @return caloriesBurnt
+	 * @throws InvalidNumberException
+	 */
 	public int doWorkouts(Scene mainScene, ArrayList<String> allExTypes, ArrayList<String> allExIntensity,
 			ArrayList<TextField> allExLengths) throws InvalidNumberException {
-		
 		caloriesBurnt= 0;
-		int b = 0;
 		
+		int b = 0;
 		while (b< allExTypes.size()) {
 			String lengths = "";
 			if (allExLengths != null) {
@@ -69,14 +63,16 @@ public class EatingPlanController extends CalorieCalculatorController{
 			b++;
 		}
 		
-		
-		
 		applicationStage.setScene(mainScene);
+		
 		return caloriesBurnt;
 	}
 	
 	
-	//Makes a new scene for the user to enter the calories burnt from different workouts
+	/**
+	 * Makes a new scene for the user to enter their workout information.
+	 * @param event
+	 */
 	@FXML
 	void getWorkouts(ActionEvent event) {
 		
@@ -168,7 +164,14 @@ public class EatingPlanController extends CalorieCalculatorController{
 	}
 
 
-	////gets the sum of calories from all the meals eaten in day
+	/**
+	 * Calculates the sum of calories from all the meals eaten in day.
+	 * Validates user input is positive integer & throws InvalidNumberException if not.
+	 * @param mainScene
+	 * @param allMeals
+	 * @return calFromMeals
+	 * @throws InvalidNumberException
+	 */
 	public int doMeals(Scene mainScene, ArrayList<TextField> allMeals) throws InvalidNumberException{
 		calfromMeals = 0;
 		
@@ -176,10 +179,9 @@ public class EatingPlanController extends CalorieCalculatorController{
 			if (i!= null) {
 				String str = i.getText();
 				for (char j : str.toCharArray()) {
-					   // Check if character is a digit. 
-					   if (!Character.isDigit(j)) {
-						   throw new InvalidNumberException("Don't use " + j + " in your age. Make sure to enter an integer.");
-					   }
+					if (!Character.isDigit(j)) {
+						throw new InvalidNumberException("Don't use " + j + " in your age. Make sure to enter an integer.");
+					}
 				}
 						
 				calfromMeals += Integer.parseInt(i.getText());
@@ -189,10 +191,15 @@ public class EatingPlanController extends CalorieCalculatorController{
 			}
 		}
 		applicationStage.setScene(mainScene);
+		
 		return calfromMeals;
 	}
 	
-	//Makes a new scene for the user to enter the calories eaten from their meals 
+	
+	/**
+	 * Makes a new scene for the user to enter the calories eaten from their meals 
+	 * @param event
+	 */
 	@FXML
 	void getMeals(ActionEvent event) {
 		Scene mainScene = applicationStage.getScene();
@@ -200,6 +207,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 		int numberOfMeals = meals.getValue();
 		int rowCounter = 0;
 		
+		// Setting base calories to number calculated in CalorieCalculatorController
 		manipulatedCalorieMaintenance = numOfCalories;
 		System.out.println("calories: "+manipulatedCalorieMaintenance);
 		
@@ -250,7 +258,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 		Label errorLabel2 = new Label("");
 		Button doneButton = new Button("Done");
 		doneButton.setOnAction(doneEvent -> {
-			try {
+			try { // Validating input.
 				doMeals(mainScene, allMeals);
 			} catch (InvalidNumberException e) {
 				errorLabel2.setText(""+e);
@@ -263,7 +271,11 @@ public class EatingPlanController extends CalorieCalculatorController{
 		applicationStage.setScene(mMealsScene);
 	}
 
-	//sets the calcount label to tell the user how many calories they need to eat in comparison to their calorie goal
+	
+	/**
+	 * Calculates the amount of calories have left to eat that day to meet goals.
+	 * Sets the calCount label to tell the user this number.
+	 */
 	@FXML
 	void setCalCountLabel() {
 		NetCalories now = new NetCalories(manipulatedCalorieMaintenance, caloriesBurnt, calfromMeals);
@@ -273,7 +285,11 @@ public class EatingPlanController extends CalorieCalculatorController{
 		calfromMeals =0;
 	}
 	
-	//resets values to calculate the calories for a new day
+	
+	/**
+	 * Resets values to calculate the calories for a new day
+	 * @param event
+	 */
 	public void newDay(ActionEvent event) {
 		manipulatedCalorieMaintenance = originalCalorieMaintenance;
 		caloriesBurnt = 0;
@@ -281,7 +297,12 @@ public class EatingPlanController extends CalorieCalculatorController{
 		calCount.setText("");
 	}
 	
-	//This method is used to change into the "Main Menu" Scene
+	
+	/**
+	 * This method is used to change into the "Main Menu" Scene
+	 * @param event
+	 * @throws IOException
+	 */
 	public void switchToMainMenu(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(new FileInputStream("src/application/WorkoutPlanView1.fxml"));

@@ -12,6 +12,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * This class is used by CalorieCalculatorController to get the user's height and weight
+ * in imperial measurements and convert to metric measurements.
+ * @author CS219-user
+ */
 public class ImperialSystemController {
 	Stage applicationStage;
 	Scene applicationScene;
@@ -29,9 +34,12 @@ public class ImperialSystemController {
     @FXML
     Label errorLabel2;
 	
-	/*
-	 * This method is used to send the information from this scene to the CalorieCalculatorController
-	 */
+
+    /**
+     * This method is used to send the information from this scene to the CalorieCalculatorController
+     * @param event
+     * @throws IOException
+     */
 	public void switchToCalorieCalculatorScene(ActionEvent event) throws IOException{
 		errorLabel2.setText("");
 		
@@ -41,9 +49,9 @@ public class ImperialSystemController {
 		
 		/*
 		 * Metric System Conversion
-		 * The calculator will only calculate in the metric system
-		 * First Convert Inches to Centimeters then Feet to Centimeters and add to get total height in Centimeters
-		 * Will also need to convert LBS to KG
+		 * The calculator will only calculate in the metric system.
+		 * First Convert Inches to Centimeters then Feet to Centimeters and add to get total height in Centimeters.
+		 * Will also convert LBS to KG.
 		 * Try/Catch makes sure user enters an integer. Also validates integer > 0.
 		 */
 		double heightInCm = 0.0;
