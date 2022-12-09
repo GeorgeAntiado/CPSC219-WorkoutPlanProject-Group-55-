@@ -38,7 +38,6 @@ public class WorkoutplanController {
 		stage.show();
 	}
 	
-	//This method is used to change into the "Weekly Eating Plan" Scene
 	public void switchToWeeklyEatingPlan(ActionEvent event) throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(new FileInputStream("src/application/WeeklyEatingPlanView.fxml"));
