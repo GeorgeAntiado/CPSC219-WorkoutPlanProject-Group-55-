@@ -8,10 +8,12 @@ import javafx.fxml.FXML;
  * @author CS219-user
  */
 public class NetCalories {
+	
 	int calorieMaintenance;
 	int caloriesBurnt;
 	int caloriesEaten;
 	int netCalories;
+	
 	
 	/**
 	 * Constructor for NetCalories.
@@ -25,12 +27,15 @@ public class NetCalories {
 		caloriesEaten = cEaten;
 	}
 	
+	
 	/**
 	 * Calculates the calories based on the instance's variables.
 	 * @return netCalories: int
 	 */
 	public int calcNetCalories() {
+		
 		netCalories = calorieMaintenance+caloriesBurnt-caloriesEaten;
+		
 		return netCalories;
 	}
 	
@@ -41,18 +46,18 @@ public class NetCalories {
 	 * @return requiredCalories: String
 	 */
 	public String setCalorieLabel() {
-		
 		String requiredCalories = "";
+		
 		if (netCalories>0) {
 			requiredCalories =  " "+ netCalories + " cal to go!";
-		}
-		else if (netCalories<0) {
+		} else if (netCalories<0) {
 			int showExcessCal = netCalories*-1;
 			requiredCalories = showExcessCal + " cals too much :(";
-		}
-		else {
+		} else {
 			requiredCalories = "You met the calorie goal!";
 		}
+		
 		return requiredCalories;
 	}
+	
 }

@@ -6,6 +6,7 @@ package application;
  *
  */
 public class UserInformation {
+	
 	private Double weight;
 	private Double height;
 	private int age;
