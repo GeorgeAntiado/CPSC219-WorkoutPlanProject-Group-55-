@@ -147,7 +147,7 @@ public class CalorieCalculatorController extends UserInformation{
     
     	/*
     	 * Must find out how often the user work outs.
-    	 * To be used in caloric intake calculation.
+    	 * To be used in calorie intake calculation.
     	 */
     	if (activeType.equals("1-3 Days of the Week")) {
     		pointsAchieved = 1.375;
@@ -187,7 +187,9 @@ public class CalorieCalculatorController extends UserInformation{
 
     
     /**
-     * This method is used to return into the  "Main menu" Scene
+     * This method is used to return into the  "Main menu" Scene.
+     * Source: Bro Code Video - JavaFX switch scenes (https://www.youtube.com/watch?v=hcM-R-YOKkQ).
+	 * This source was used for the methods to allow us to switch into different scenes.
      * @param event
      * @throws IOException
      */
