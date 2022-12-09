@@ -16,6 +16,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Parent of EatingPlanController.
+ * Controls the Calorie Calculator scene.
+ * @author CS219-user
+ */
 public class CalorieCalculatorController extends UserInformation{
 
 	public Stage applicationStage;

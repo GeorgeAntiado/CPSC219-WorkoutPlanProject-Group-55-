@@ -17,7 +17,12 @@ public class WorkoutplanController {
 	Stage stage;
 	Scene scene;
 	
-	//This method is used to change into the "Calorie Calculator" Scene
+	
+	/**
+	 * This method is used to change into the "Calorie Calculator" Scene
+	 * @param event
+	 * @throws IOException
+	 */
 	public void switchToCalorieCalculatorScene(ActionEvent event) throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(new FileInputStream("src/application/CalorieCalculatorView.fxml"));
@@ -27,7 +32,12 @@ public class WorkoutplanController {
 		stage.show();
 	}
 	
-	//This method is used to change into the "Eating Plan" Scene
+	
+	/**
+	 * This method is used to change into the "Eating Plan" Scene
+	 * @param event
+	 * @throws IOException
+	 */
 	public void switchToWeeklyEatingPlan(ActionEvent event) throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(new FileInputStream("src/application/WeeklyEatingPlanView.fxml"));

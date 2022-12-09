@@ -37,8 +37,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 	Label calCount;
 	
 	//variable to store the maintenance calories 
-	int originalCalorieMaintenance = 2200; // was super.getCalculatedCalories()
-
+	int originalCalorieMaintenance = 2200;
 	
 	//variable that changes that tells the amount of calories that the user needs to eat with the calfromMeals 
 	//and caloriesBurnt variables into account
@@ -69,9 +68,8 @@ public class EatingPlanController extends CalorieCalculatorController{
 			b++;
 		}
 		
-		
-		
 		applicationStage.setScene(mainScene);
+		
 		return caloriesBurnt;
 	}
 	
@@ -194,6 +192,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 		int numberOfMeals = meals.getValue();
 		int rowCounter = 0;
 		
+		// Setting base calories to number calculated in CalorieCalculatorController
 		manipulatedCalorieMaintenance = numOfCalories;
 		System.out.println("calories: "+manipulatedCalorieMaintenance);
 		
