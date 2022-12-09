@@ -20,20 +20,20 @@ public class EatingPlanController extends CalorieCalculatorController{
 	private Scene scene;
 	
 	
-	int calfromMeals = 0; // tracks calories eaten from all meals
-	int caloriesBurnt = 0; // tracks calories burned from all workouts
+	private int calfromMeals = 0; // tracks calories eaten from all meals
+	private int caloriesBurnt = 0; // tracks calories burned from all workouts
 	
-	int originalCalorieMaintenance = 2200; // stores the maintenance calories, default 2200
-	int manipulatedCalorieMaintenance = originalCalorieMaintenance; // tells the amount of calories that the user needs to eat, is updated in code
-	
-	@FXML
-	ChoiceBox<Integer> meals;
+	private int originalCalorieMaintenance = 2200; // stores the maintenance calories, default 2200
+	private int manipulatedCalorieMaintenance = getOriginalCalorieMaintenance(); // tells the amount of calories that the user needs to eat, is updated in code
 	
 	@FXML
-	ChoiceBox<Integer> workouts;
+	private ChoiceBox<Integer> meals;
 	
 	@FXML
-	Label calCount;
+	private ChoiceBox<Integer> workouts;
+	
+	@FXML
+	private Label calCount;
 	
 	/**
 	 * Collects the input from the workouts scene and calculates the caloriesBurnt
@@ -46,7 +46,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 	 */
 	public int doWorkouts(Scene mainScene, ArrayList<String> allExTypes, ArrayList<String> allExIntensity,
 			ArrayList<TextField> allExLengths) throws InvalidNumberException {
-		caloriesBurnt= 0;
+		setCaloriesBurnt(0);
 		
 		int b = 0;
 		while (b< allExTypes.size()) {
@@ -59,13 +59,13 @@ public class EatingPlanController extends CalorieCalculatorController{
 			}
 			Exercise a = new Exercise(allExTypes.get(b), allExIntensity.get(b), lengths);
 				
-			caloriesBurnt += a.getcaloriesBurnt();
+			setCaloriesBurnt(getCaloriesBurnt() + a.getcaloriesBurnt());
 			b++;
 		}
 		
 		applicationStage.setScene(mainScene);
 		
-		return caloriesBurnt;
+		return getCaloriesBurnt();
 	}
 	
 	
@@ -80,8 +80,6 @@ public class EatingPlanController extends CalorieCalculatorController{
 		
 		int numberOfWorkouts = workouts.getValue();
 		int rowCounter = 0;
-		
-		//Lists to keep track of the exercise type, intensity, and length for each workout
 		ArrayList<String> allExTypes = new ArrayList<String>();
 		ArrayList<String> allExIntensity = new ArrayList<String>();
 		ArrayList<TextField> allExLengths = new ArrayList<TextField>();
@@ -115,8 +113,6 @@ public class EatingPlanController extends CalorieCalculatorController{
 				exTypeChoiceBox.getItems().add("WeightLifting");
 				exTypeChoiceBox.getItems().add("Sports");
 				
-				//This button sets the type of exercise for each individual workout 
-				//in the allExTypes list
 				Button setType = new Button("Set exercise type");
 				setType.setOnAction(d-> allExTypes.add(exTypeChoiceBox.getValue()));
 				exTypeColumn.getChildren().addAll(exTypeLabel, exTypeChoiceBox, setType);
@@ -128,8 +124,6 @@ public class EatingPlanController extends CalorieCalculatorController{
 				exIntensityChoiceBox.getItems().add("Moderate");
 				exIntensityChoiceBox.getItems().add("Intense");
 				
-				//This button sets the intensity for each individual workout
-				//in the allExIntensity list
 				Button setIntensity = new Button("Set exercise intensity");
 				setIntensity.setOnAction(e -> allExIntensity.add(exIntensityChoiceBox.getValue()));
 				exIntensityColumn.getChildren().addAll(exIntensityLabel, exIntensityChoiceBox, setIntensity);
@@ -173,7 +167,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 	 * @throws InvalidNumberException
 	 */
 	public int doMeals(Scene mainScene, ArrayList<TextField> allMeals) throws InvalidNumberException{
-		calfromMeals = 0;
+		setCalfromMeals(0);
 		
 		for(TextField i : allMeals) {
 			if (i!= null) {
@@ -184,15 +178,15 @@ public class EatingPlanController extends CalorieCalculatorController{
 					}
 				}
 						
-				calfromMeals += Integer.parseInt(i.getText());
-				if(calfromMeals<0) {
+				setCalfromMeals(getCalfromMeals() + Integer.parseInt(i.getText()));
+				if(getCalfromMeals()<0) {
 					throw new InvalidNumberException("You entered a negative number. Please make sure all numbers are greater than 0.");
 				}
 			}
 		}
 		applicationStage.setScene(mainScene);
 		
-		return calfromMeals;
+		return getCalfromMeals();
 	}
 	
 	
@@ -208,8 +202,8 @@ public class EatingPlanController extends CalorieCalculatorController{
 		int rowCounter = 0;
 		
 		// Setting base calories to number calculated in CalorieCalculatorController
-		manipulatedCalorieMaintenance = numOfCalories;
-		System.out.println("calories: "+manipulatedCalorieMaintenance);
+		setManipulatedCalorieMaintenance(numOfCalories);
+		System.out.println("calories: "+getManipulatedCalorieMaintenance());
 		
 		VBox allRows = new VBox();
 		
@@ -218,27 +212,27 @@ public class EatingPlanController extends CalorieCalculatorController{
 		
 		Label mealAdvice = new Label("");
 		if (numberOfMeals ==1) {
-			mealAdvice.setText("This meal should be about " + manipulatedCalorieMaintenance + " calories");
+			mealAdvice.setText("This meal should be about " + getManipulatedCalorieMaintenance() + " calories");
 		}else if (numberOfMeals == 2) {
-			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/2 + " calories. "
+			mealAdvice.setText("Each meal should be around " + getManipulatedCalorieMaintenance()/2 + " calories. "
 					+ "One meal should be consumed in the morning and the other in the evening.");
 		}else if (numberOfMeals == 3) {
-			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/3 + " calories. "
+			mealAdvice.setText("Each meal should be around " + getManipulatedCalorieMaintenance()/3 + " calories. "
 					+ "Can be eaten like the conventional three square meals breakfast, lunch, and dinner.");
 		}else if (numberOfMeals == 4) {
-			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/4 + " calories. "
+			mealAdvice.setText("Each meal should be around " + getManipulatedCalorieMaintenance()/4 + " calories. "
 					+ "Each meal can be eaten around every 4.5 hours.");
 		}else if (numberOfMeals == 5) {
-			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/5 + " calories. "
+			mealAdvice.setText("Each meal should be around " + getManipulatedCalorieMaintenance()/5 + " calories. "
 					+ "Each meal can be eaten around every  3.5 hours.");
 		}else if (numberOfMeals == 6) {
-			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/6 + " calories. "
+			mealAdvice.setText("Each meal should be around " + getManipulatedCalorieMaintenance()/6 + " calories. "
 					+ "Each meal can be eaten around every  3 hours.");
 		}else if (numberOfMeals == 7) {
-			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/7 + " calories. "
+			mealAdvice.setText("Each meal should be around " + getManipulatedCalorieMaintenance()/7 + " calories. "
 					+ "Each meal can be eaten around every  2.5 hours.");
 		}else if (numberOfMeals == 8) {
-			mealAdvice.setText("Each meal should be around " + manipulatedCalorieMaintenance/8 + " calories. "
+			mealAdvice.setText("Each meal should be around " + getManipulatedCalorieMaintenance()/8 + " calories. "
 					+ "Each meal can be eaten around every  2 hours.");
 		}
 		allRows.getChildren().add(mealAdvice);
@@ -278,11 +272,11 @@ public class EatingPlanController extends CalorieCalculatorController{
 	 */
 	@FXML
 	void setCalCountLabel() {
-		NetCalories now = new NetCalories(manipulatedCalorieMaintenance, caloriesBurnt, calfromMeals);
-		manipulatedCalorieMaintenance = now.calcNetCalories();
+		NetCalories now = new NetCalories(getManipulatedCalorieMaintenance(), getCaloriesBurnt(), getCalfromMeals());
+		setManipulatedCalorieMaintenance(now.calcNetCalories());
 		calCount.setText(now.setCalorieLabel());
-		caloriesBurnt = 0;
-		calfromMeals =0;
+		setCaloriesBurnt(0);
+		setCalfromMeals(0);
 	}
 	
 	
@@ -291,9 +285,9 @@ public class EatingPlanController extends CalorieCalculatorController{
 	 * @param event
 	 */
 	public void newDay(ActionEvent event) {
-		manipulatedCalorieMaintenance = originalCalorieMaintenance;
-		caloriesBurnt = 0;
-		calfromMeals = 0;
+		setManipulatedCalorieMaintenance(getOriginalCalorieMaintenance());
+		setCaloriesBurnt(0);
+		setCalfromMeals(0);
 		calCount.setText("");
 	}
 	
@@ -310,5 +304,50 @@ public class EatingPlanController extends CalorieCalculatorController{
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+	}
+
+	
+	/*
+	 * SETTERS AND GETTERS
+	 */
+	
+
+	int getCalfromMeals() {
+		return calfromMeals;
+	}
+
+
+	void setCalfromMeals(int calfromMeals) {
+		this.calfromMeals = calfromMeals;
+	}
+
+
+	int getCaloriesBurnt() {
+		return caloriesBurnt;
+	}
+
+
+	void setCaloriesBurnt(int caloriesBurnt) {
+		this.caloriesBurnt = caloriesBurnt;
+	}
+
+
+	int getOriginalCalorieMaintenance() {
+		return originalCalorieMaintenance;
+	}
+
+
+	void setOriginalCalorieMaintenance(int originalCalorieMaintenance) {
+		this.originalCalorieMaintenance = originalCalorieMaintenance;
+	}
+
+
+	int getManipulatedCalorieMaintenance() {
+		return manipulatedCalorieMaintenance;
+	}
+
+
+	void setManipulatedCalorieMaintenance(int manipulatedCalorieMaintenance) {
+		this.manipulatedCalorieMaintenance = manipulatedCalorieMaintenance;
 	}
 }

@@ -206,6 +206,11 @@ public class CalorieCalculatorController extends UserInformation{
 		applicationStage.show();
 	}
 
+	
+	/*
+	 * SETTERS AND GETTERS
+	 */
+	
 
 	String getHeightString() {
 		return heightString;

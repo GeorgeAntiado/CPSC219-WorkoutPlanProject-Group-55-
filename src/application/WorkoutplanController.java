@@ -14,9 +14,8 @@ import javafx.stage.Stage;
 public class WorkoutplanController {
 	
 	//Control for the change in scenes
-	Stage stage;
-	Scene scene;
-	
+	private Stage stage;
+	private Scene scene;
 	
 	/**
 	 * This method is used to change into the "Calorie Calculator" Scene
@@ -31,7 +30,6 @@ public class WorkoutplanController {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
 	
 	/**
 	 * This method is used to change into the "Eating Plan" Scene
