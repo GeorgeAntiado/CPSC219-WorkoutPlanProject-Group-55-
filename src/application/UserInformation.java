@@ -1,9 +1,8 @@
 package application;
 
 /**
- * Class validates user input (double & int) in constructor and calculates BMR in calculateBMR() method.
- * @author CS219-user Sage Sieppert
- *
+ * Parent of CalorieCalculatorController.
+ * @author CS219-user compSciSage
  */
 public class UserInformation {
 	
@@ -14,6 +13,9 @@ public class UserInformation {
 	private int calculatedCalories;
 	
 	
+	/**
+	 * Default constructor.
+	 */
 	UserInformation(){
 		weight = 0.0;
 		height = 0.0;
@@ -22,43 +24,48 @@ public class UserInformation {
 		calculatedCalories = 0;
 	}
 	
-	public UserInformation(Double uWeight, Double uHeight, int uAge, String uSex) {
-		setSex(uSex);
-		setWeight(uWeight);
-		setHeight(uHeight);
-		setAge(uAge);
-	}
 	
 	/**
-	 * Takes the user input from CalorieCalculatorController in the form of String.
-	 * Validates that uAge is an integer, and uWeight and uHeight are doubles.
-	 * Validates that all numbers are > 0.
-	 * Sets weight, height, age, and sex.
+	 * Constructor used by CalorieCalculatorController (for setting to a default)
 	 * @param uWeight
 	 * @param uHeight
 	 * @param uAge
 	 * @param uSex
+	 */
+	UserInformation(Double uWeight, Double uHeight, int uAge, String uSex){
+		weight = uWeight;
+		height = uHeight;
+		age = uAge;
+		sex = uSex;
+	}
+	
+	
+	/**
+	 * Constructor. Sets instance variables.
+	 * Validates uAge, uHeight, and uWeight & throws InvalidNumberException if not.
+	 * @param uWeight --> weight: Double
+	 * @param uHeight --> height: Double
+	 * @param uAge --> age: int
+	 * @param uSex
 	 * @throws InvalidNumberException
 	 */
 	UserInformation(String uWeight, String uHeight, String uAge, String uSex) throws InvalidNumberException{
-		setSex(uSex);
+		
+		setSex(uSex); // No validation needed. Input is from a choice box.
 		
 		boolean validNumbers = true;
 		
-		
-		// Validating age
+		// Validating uAge is an integer.
 		for (char i : uAge.toCharArray()) {
-	    	// Check if character is a digit. 
 	    	if (!Character.isDigit(i)) {
 	    		validNumbers = false;
 	    		throw new InvalidNumberException("Don't use " + i + " in your age. Make sure to enter an integer.");
 	    	}
 		}
 		
-		// Validating weight
+		// Validating uWeight is a double.
 		boolean checkForDecimal = false;
 		for (char i : uWeight.toCharArray()) {
-    		// Check if character is a digit. 
     		if (!Character.isDigit(i)) {
     			// Check if character is a decimal.
     			if (i == '.') {
@@ -76,10 +83,9 @@ public class UserInformation {
     		}	
 		}
 		
-		// Validating height
+		// Validating uHeight is a double.
 		checkForDecimal = false;
 		for (char i : uHeight.toCharArray()) {
-    		// Check if character is a digit. 
     		if (!Character.isDigit(i)) {
     			// Check if character is a decimal.
     			if (i == '.') {
@@ -97,20 +103,23 @@ public class UserInformation {
     		}	
 		}
 		
-		// Setting instance variables
+		// Setting instance variables.
 		if (validNumbers == true) {
 			setWeight(Double.parseDouble(uWeight));
 			setHeight(Double.parseDouble(uHeight));
 			setAge(Integer.parseInt(uAge));
 			
-			// Validating positive numbers
+			// Validating they are all positive numbers.
 			if(getWeight() < 0 || getHeight() < 0 || getAge() < 0) {
 				throw new InvalidNumberException("You entered a negative number. Please make sure all numbers are greater than 0.");
 			}
 		}
 	}
 
-	
+	/**
+	 * Copy constructor.
+	 * @param toCopy
+	 */
 	UserInformation(UserInformation toCopy){
 		age = toCopy.age;
 		height = toCopy.height;
@@ -121,7 +130,7 @@ public class UserInformation {
 	
 	/**
 	 * Calculates the BasalMetabolicRate based on sex, height, weight, and age.
-	 * @return basalMetabolicRate
+	 * @return basalMetabolicRate: Double
 	 */
 	public Double calculateBMR() {
 		double basalMetabolicRate = 0.0;
@@ -135,16 +144,26 @@ public class UserInformation {
 		return basalMetabolicRate;
 	}
 	
+	
+	/**
+	 * Calculates the number of calories the user should eat in a day.
+	 * @param points
+	 * @param weightGoals
+	 * @return calculatedCalories: int
+	 */
 	public int calculateNumCalories(Double points, int weightGoals) {
-		System.out.println("UserInformation: weight=" + getWeight() + "; height="+getHeight()+"; age="+getAge()+"; sex="+getSex());
-		System.out.println("BMR=" + calculateBMR() + "; points=" + points + "; weightGoals=" + weightGoals);
+		System.out.println("UserInformation: weight="+getWeight()+"; height="+getHeight()+"; age="+getAge()+"; sex="+getSex()+"; BMR="+calculateBMR()+"; points="+points+"; weightGoals="+weightGoals);
+		
 		Double numOfCaloriesDouble = calculateBMR() * points + weightGoals;
     	setCalculatedCalories(numOfCaloriesDouble.intValue());
+    	
 		return calculatedCalories;
 	}
 	
 	
-	//GETTERS AND SETTERS
+	/*
+	 * SETTERS AND GETTERS (default)
+	 */
 	
 	Double getWeight() {
 		return weight;
