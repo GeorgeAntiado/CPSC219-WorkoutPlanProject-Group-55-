@@ -11,6 +11,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * This class is used by CalorieCalculatorController to get the user's height and weight
+ * in in metric measurements.
+ * @author CS219-user
+ */
 public class MetricSystemController {
 	Stage applicationStage;
 	Scene applicationScene;
@@ -22,9 +27,12 @@ public class MetricSystemController {
     @FXML
     private TextField userHeight;
     
-	/*
-	 * This method is used to send the information from this scene to the CalorieCalculatorController
-	 */
+    /**
+     * This method is used to send the information from this scene to 
+     * 	the CalorieCalculatorController.
+     * @param event
+     * @throws IOException
+     */
 	public void switchToCalorieCalculatorScene(ActionEvent event) throws IOException{
 		
 		String userHeightMetric = userHeight.getText();
