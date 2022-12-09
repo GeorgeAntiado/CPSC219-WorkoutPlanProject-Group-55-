@@ -11,7 +11,9 @@ public class BasalMetabolicRate {
 	private int age;
 	private String sex;
 	
-	BasalMetabolicRate(Double uWeight, Double uHeight, int uAge, String uSex) {
+	
+	
+	public BasalMetabolicRate(Double uWeight, Double uHeight, int uAge, String uSex) {
 		setSex(uSex);
 		setWeight(uWeight);
 		setHeight(uHeight);
@@ -35,7 +37,7 @@ public class BasalMetabolicRate {
 		boolean validNumbers = true;
 		
 		
-		// validates that uAge is an integer
+		// Validating age
 		for (char i : uAge.toCharArray()) {
 	    	// Check if character is a digit. 
 	    	if (!Character.isDigit(i)) {
@@ -44,7 +46,7 @@ public class BasalMetabolicRate {
 	    	}
 		}
 		
-		
+		// Validating weight
 		boolean checkForDecimal = false;
 		for (char i : uWeight.toCharArray()) {
     		// Check if character is a digit. 
@@ -65,7 +67,7 @@ public class BasalMetabolicRate {
     		}	
 		}
 		
-		
+		// Validating height
 		checkForDecimal = false;
 		for (char i : uHeight.toCharArray()) {
     		// Check if character is a digit. 
@@ -86,17 +88,28 @@ public class BasalMetabolicRate {
     		}	
 		}
 		
+		// Setting instance variables
 		if (validNumbers == true) {
 			setWeight(Double.parseDouble(uWeight));
 			setHeight(Double.parseDouble(uHeight));
 			setAge(Integer.parseInt(uAge));
 			
+			// Validating positive numbers
 			if(getWeight() < 0 || getHeight() < 0 || getAge() < 0) {
 				throw new InvalidNumberException("You entered a negative number. Please make sure all numbers are greater than 0.");
 			}
 		}
 	}
 
+	
+	BasalMetabolicRate(BasalMetabolicRate toCopy){
+		this.age = toCopy.age;
+		this.height = toCopy.height;
+		this.weight = toCopy.weight;
+		this.sex = toCopy.sex;
+	}
+	
+	
 	/**
 	 * Calculates the BasalMetabolicRate based on sex, height, weight, and age.
 	 * @return basalMetabolicRate
