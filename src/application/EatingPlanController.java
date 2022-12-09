@@ -86,13 +86,6 @@ public class EatingPlanController extends CalorieCalculatorController{
 		
 		VBox allRows = new VBox();
 		
-		if (numberOfWorkouts == 0) {
-			allExTypes.add("Cardio");
-			allExIntensity.add("Light");
-			TextField g = new TextField("0");
-			allExLengths.add(g);
-		}
-		else if (numberOfWorkouts !=0) {
 		
 			Label intensityAdvice = new Label(" Tips about intensity: ");
 			Label intensityAdvice2 = new Label(" Light should be as difficult as walking.");
@@ -137,7 +130,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 			workoutRow.getChildren().addAll(workoutLabel, exTypeColumn, exIntensityColumn, exLength);
 			allRows.getChildren().add(workoutRow);
 		}
-		}
+		
 		
 		Label errorLabel = new Label("");
 		Button doneButton = new Button("Done");
