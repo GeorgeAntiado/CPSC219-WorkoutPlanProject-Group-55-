@@ -54,19 +54,19 @@ public class EatingPlanController {
 		caloriesBurnt= 0;
 		int b = 0;
 		
-			while (b< allExTypes.size()) {
-				String lengths = "";
-				if (allExLengths != null) {
-				lengths = allExLengths.get(b).getText();
-				}
-				else {
-					lengths = "";
-				}
-				exercise a = new exercise(allExTypes.get(b), allExIntensity.get(b), lengths);
-				
-				caloriesBurnt += a.getcaloriesBurnt();
-				b++;
+		while (b< allExTypes.size()) {
+			String lengths = "";
+			if (allExLengths != null) {
+			lengths = allExLengths.get(b).getText();
 			}
+			else {
+				lengths = "";
+			}
+			exercise a = new exercise(allExTypes.get(b), allExIntensity.get(b), lengths);
+				
+			caloriesBurnt += a.getcaloriesBurnt();
+			b++;
+		}
 		
 		
 		
@@ -146,7 +146,6 @@ public class EatingPlanController {
 			try {
 				doWorkouts(mainScene, allExTypes, allExIntensity,  allExLengths);
 			} catch (InvalidNumberException e) {
-				// TODO Auto-generated catch block
 				errorLabel.setText(""+e);
 			}
 		});
@@ -159,7 +158,7 @@ public class EatingPlanController {
 	}
 
 
-	////gets the sum of calories from all the meals eaten on monday
+	////gets the sum of calories from all the meals eaten in day
 	public int doMeals(Scene mainScene, ArrayList<TextField> allMeals) throws InvalidNumberException{
 		calfromMeals = 0;
 		
@@ -241,7 +240,6 @@ public class EatingPlanController {
 			try {
 				doMeals(mainScene, allMeals);
 			} catch (InvalidNumberException e) {
-				// TODO Auto-generated catch block
 				errorLabel2.setText(""+e);
 			}
 		});
