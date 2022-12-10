@@ -29,7 +29,8 @@ public class MetricSystemController {
     
     /**
      * This method is used to send the information from this scene to 
-     * 	the CalorieCalculatorController.
+     * the CalorieCalculatorController.
+     * Source: Bro Code Video - JavaFX communication between controllers (https://www.youtube.com/watch?v=wxhGKR3PQpo&t=55s)
      * @param event
      * @throws IOException
      */
