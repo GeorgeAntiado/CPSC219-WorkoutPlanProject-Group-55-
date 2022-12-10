@@ -242,5 +242,22 @@ public class CalorieCalculatorController extends UserInformation{
 	void setNewUser(UserInformation newUser) {
 		this.newUser = newUser;
 	}
-	
+	/**
+	 * This method is used to change into the "Eating Plan" Scene.
+	 * Source: Bro Code Video - JavaFX switch scenes (https://www.youtube.com/watch?v=hcM-R-YOKkQ).
+	 * This source was used for the methods to allow us to switch into different scenes.
+	 * @param event
+	 * @throws IOException
+	 */
+	public void switchToWeeklyEatingPlan(ActionEvent event) throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		VBox root = loader.load(new FileInputStream("src/application/WeeklyEatingPlanView.fxml"));
+		applicationStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		EatingPlanController controller = (EatingPlanController)loader.getController();
+		controller.appStage = applicationStage;
+		applicationScene = new Scene(root);
+		applicationStage.setScene(applicationScene);
+		applicationStage.show();
+    
+	}
 }

@@ -12,7 +12,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EatingPlanController">
    <children>
-      <Label text="            Eating and Workout Tracker:                   ">
+      <Label text="            Eating and Workout Tracker:           ">
          <VBox.margin>
             <Insets left="10.0" />
          </VBox.margin>
@@ -94,11 +94,16 @@
       </HBox>
       <Button mnemonicParsing="false" onAction="#newDay" prefHeight="18.0" prefWidth="96.0" text="New day">
          <VBox.margin>
-            <Insets bottom="15.0" left="65.0" />
+            <Insets bottom="20.0" left="152.0" />
+         </VBox.margin></Button>
+         
+         <Button mnemonicParsing="false" onAction="#switchToCalorieCalculatorScene" prefHeight="18.0" text="Update any changes">
+         <VBox.margin>
+            <Insets bottom="20.0" left="138.0" />
          </VBox.margin></Button>
       <Button mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="18.0" prefWidth="96.0" text="Main Menu">
          <VBox.margin>
-            <Insets bottom="15.0" left="65.0" />
+            <Insets bottom="20.0" left="152.0" />
          </VBox.margin></Button>
    </children>
 </VBox>
