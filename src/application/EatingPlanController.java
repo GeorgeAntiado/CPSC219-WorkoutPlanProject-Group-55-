@@ -15,7 +15,7 @@ import javafx.scene.control.*;
 
 public class EatingPlanController extends CalorieCalculatorController{
 	
-	Stage applicationStage;
+	Stage appStage;
 	private Stage stage;
 	private Scene scene;
 	
@@ -63,7 +63,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 			b++;
 		}
 		
-		applicationStage.setScene(mainScene);
+		appStage.setScene(mainScene);
 		
 		return getCaloriesBurnt();
 	}
@@ -76,7 +76,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 	@FXML
 	void getWorkouts(ActionEvent event) {
 		
-		Scene mainScene = applicationStage.getScene();
+		Scene mainScene = appStage.getScene();
 		
 		int numberOfWorkouts = workouts.getValue();
 		int rowCounter = 0;
@@ -146,7 +146,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 		allRows.getChildren().add(doneButton);
 		
 		Scene mWorkoutsScene = new Scene(allRows);
-		applicationStage.setScene(mWorkoutsScene);
+		appStage.setScene(mWorkoutsScene);
 		
 	}
 
@@ -177,7 +177,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 				}
 			}
 		}
-		applicationStage.setScene(mainScene);
+		appStage.setScene(mainScene);
 		
 		return getCalfromMeals();
 	}
@@ -189,7 +189,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 	 */
 	@FXML
 	void getMeals(ActionEvent event) {
-		Scene mainScene = applicationStage.getScene();
+		Scene mainScene = appStage.getScene();
 		
 		int numberOfMeals = meals.getValue();
 		int rowCounter = 0;
@@ -255,7 +255,7 @@ public class EatingPlanController extends CalorieCalculatorController{
 		allRows.getChildren().add(doneButton);
 		
 		Scene mMealsScene = new Scene(allRows);
-		applicationStage.setScene(mMealsScene);
+		appStage.setScene(mMealsScene);
 	}
 
 	
@@ -295,6 +295,22 @@ public class EatingPlanController extends CalorieCalculatorController{
 	public void switchToMainMenu(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(new FileInputStream("src/application/WorkoutPlanView1.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	/**
+	 * This method is used to change into the "Calorie Calculator" Scene.
+	 * Source: Bro Code Video - JavaFX switch scenes (https://www.youtube.com/watch?v=hcM-R-YOKkQ).
+	 * This source was used for the methods to allow us to switch into different scenes.
+	 * @param event
+	 * @throws IOException
+	 */
+	public void switchToCalorieCalculatorScene(ActionEvent event) throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		VBox root = loader.load(new FileInputStream("src/application/CalorieCalculatorView.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
